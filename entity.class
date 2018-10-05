@@ -1,21 +1,28 @@
 public class entity{
   int x;
   int y;
-  int length;
+  int width;
   int height;
-  String direction; #there must be a better data type for this, maybe make a class for cardinality?
-  int speed; #pixels every tick
+  
 
   public entity(){
     x = 0;
     y = 0;
-    length = 25
-    height = 25
-    direction = "up";
-    speed = 1;
+    width = 40;
+    height = 40;
+  }
+  public entity(int startX, int startY, int startWidth, int startHeight){
+    x = startX;
+    y = startY;
+    width = startWidth;
+    height = startHeight;
   }
   
   #to do: add getters and setters for all current attributes
+  
+  public bool collides(entity1, entity2){
+    #all collision logic here. return true if they collide
+  }
 
 
 }
