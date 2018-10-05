@@ -5,7 +5,7 @@ public class head{
     while (True){
       
       while (True){
-        
+        #this is where the meni system will go. to contue to the game break out of this loop, and vice versa
       }
       
       while (True){
