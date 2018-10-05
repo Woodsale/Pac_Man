@@ -1,0 +1,55 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class Gui extends JFrame{
+	private JTextField st; //Score Text
+	private JButton pm_one,pm_two,pm_three;
+	
+	public Gui() {
+		super("Pac Man");
+		setLayout(new FlowLayout());
+		
+		setLayout(new GridBagLayout());
+		GridBagConstraints position = new GridBagConstraints();
+		
+		st = new JTextField("Score: 0",15);
+		st.setFont(new Font("Serif",Font.PLAIN,14));
+		st.setEditable(false);
+		position.gridx = 0;
+		position.gridy = 0;
+		position.gridwidth = 2;
+		position.gridheight = 1;
+		add(st,position);
+
+		Icon pm = new ImageIcon(getClass().getResource("Pac_Man_Pic.png"));
+		pm_one = new JButton(pm);
+		position.gridx = 2;
+		position.gridy = 0;
+		position.gridwidth = 1;
+		position.gridheight = 1;
+		add(pm_one,position);
+		
+		pm_two = new JButton(pm);
+		position.gridx = 3;
+		position.gridy = 0;
+		position.gridwidth = 1;
+		position.gridheight = 1;
+		add(pm_two,position);
+		
+		pm_three = new JButton(pm);
+		position.gridx = 4;
+		position.gridy = 0;
+		position.gridwidth = 1;
+		position.gridheight = 1;
+		add(pm_three,position);
+		
+		//HandlerClass handler = new HandlerClass();	
+	}/*
+	private class HandlerClass implements ItemListener{
+		public void itemStateChanged(ItemEvent event){
+			
+		}
+	}*/
+	
+}
