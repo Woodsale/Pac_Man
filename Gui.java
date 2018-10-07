@@ -6,6 +6,10 @@ public class Gui extends JFrame{
 	private JTextField st; //Score Text
 	private JButton pm_one,pm_two,pm_three;
 	
+	private JMenuBar menu;
+    private JMenu options;
+    private JMenuItem quit, help, newGame; 
+	
 	public Gui() {
 		super("Pac Man");
 		setLayout(new FlowLayout());
@@ -21,7 +25,7 @@ public class Gui extends JFrame{
 		position.gridwidth = 2;
 		position.gridheight = 1;
 		add(st,position);
-
+		
 		Icon pm = new ImageIcon(getClass().getResource("Pac_Man_Pic.png"));
 		pm_one = new JButton(pm);
 		position.gridx = 2;
@@ -44,12 +48,29 @@ public class Gui extends JFrame{
 		position.gridheight = 1;
 		add(pm_three,position);
 		
-		//HandlerClass handler = new HandlerClass();	
-	}/*
-	private class HandlerClass implements ItemListener{
-		public void itemStateChanged(ItemEvent event){
-			
-		}
-	}*/
+		setupMenus();
+	}
+	private void setupMenus(){
+        options = new JMenu("Options");
+        newGame = new JMenuItem("New Game");
+        help = new JMenuItem("Help");
+        quit = new JMenuItem("Quit");
+        options.add(newGame);
+        options.add(help);
+        options.add(quit);
+        menu = new JMenuBar();
+        setJMenuBar(menu);
+        menu.add(options);
+
+        /*options.addActionListener(this);
+        quit.addActionListener(this);
+        help.addActionListener(this);
+    	*/
+    }
+	
+	public void actionPerformed(ActionEvent e)
+    {
+        
+    }
 	
 }
