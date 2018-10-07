@@ -1,4 +1,3 @@
-
 /**
  * Write a description of class Image here.
  *
@@ -6,29 +5,22 @@
  * @version (a version number or a date)
  */
 import java.awt.*;
-
-import javax.imageio.ImageIO;
-import javax.swing.*;
-
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.awt.*;
 import javax.swing.*;
-import java.awt.event.*;
 
 public class mainMenu extends JFrame implements ActionListener
 {
     private JLabel newGame;
-    private JButton startGame, Exit;
+    private JButton startGame, Exit, onePlayer, twoPlayer;
 
     private JMenuBar menu;
     private JMenu options;
     private JMenuItem quit, help; 
 
     private JLabel difficulty;
-    private JCheckBox onePlayer, twoPlayer,easy, medium, hard;
+    private JCheckBox easy, medium, hard;
+    
+    private ButtonGroup difficultyChoice;
     
     public static void main(String args [])
     {
@@ -37,7 +29,6 @@ public class mainMenu extends JFrame implements ActionListener
         w.pack();
         w.setVisible(true);
         w.setTitle("Pac Man");
-        
 
     }
 
@@ -45,9 +36,8 @@ public class mainMenu extends JFrame implements ActionListener
     {   
 
         setLayout(new BorderLayout());
-	setContentPane(new JLabel(new ImageIcon("pac-man-minimalist-featured-image-1024x576.png")));
-	setLayout(new FlowLayout());
-        
+        setContentPane(new JLabel(new ImageIcon("pac-man-minimalist-featured-image-1024x576.png")));
+        setLayout(new FlowLayout());
 
         /**set the layout to GridBag*/
         setLayout(new GridBagLayout());
@@ -65,14 +55,14 @@ public class mainMenu extends JFrame implements ActionListener
         loc.gridx = 0;
         loc.gridy = 1;
         loc.insets.bottom = 20;
-        onePlayer = new JCheckBox("One Player");
+        onePlayer = new JButton("One Player");
         add(onePlayer, loc);
 
         loc = new GridBagConstraints();
         loc.gridx = 1;
         loc.gridy = 1;
         loc.insets.bottom = 20;
-        twoPlayer = new JCheckBox("Two Player");
+        twoPlayer = new JButton("Two Player");
         add(twoPlayer, loc);
 
         loc = new GridBagConstraints();
@@ -86,12 +76,14 @@ public class mainMenu extends JFrame implements ActionListener
         loc = new GridBagConstraints();
         loc.gridx = 0;
         loc.gridy = 3;
+        loc.insets.bottom = 20;
         easy = new JCheckBox("Easy");
         add(easy, loc);
 
         loc = new GridBagConstraints();
         loc.gridx = 1;
         loc.gridy = 3;
+        loc.insets.bottom = 20;
         medium = new JCheckBox("Medium");
         add(medium, loc);
 
@@ -103,11 +95,18 @@ public class mainMenu extends JFrame implements ActionListener
         add(hard, loc);
         
         loc = new GridBagConstraints();
-        loc.gridx = 2;
+        loc.gridx = 0;
         loc.gridy = 4;
         loc.insets.top = 20;
         startGame = new JButton("Start Game!");
         add(startGame, loc);
+        
+        /**Allows for only one difficulty to 
+         * be chosen*/
+        difficultyChoice = new ButtonGroup();
+        difficultyChoice.add(easy);
+        difficultyChoice.add(medium);
+        difficultyChoice.add(hard);
 
         onePlayer.addActionListener(this);
         twoPlayer.addActionListener(this);
@@ -140,4 +139,3 @@ public class mainMenu extends JFrame implements ActionListener
         JComponent buttonPressed = (JComponent) e.getSource();
     }
 }
-
