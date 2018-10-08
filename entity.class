@@ -20,8 +20,33 @@ public class entity{
   
   #to do: add getters and setters for all current attributes
   
+  public void setX(int startX){
+    x = startX;
+  }
+  public void setY(int startY){
+    y = startY;
+  }
+  public void setWidth(int startWidth){
+    width = startWidth;
+  }
+  public void setHeight(int startHeight){
+    height = startHeight;
+  } 
+  public int getX(){
+    return x;
+  }
+  public int getY(){
+    return y;
+  }
+  public int getWidth(){
+    return width;
+  }
+  public int getHeigth(){
+    return height;
+  }
   public bool collides(entity1, entity2){
     #all collision logic here. return true if they collide
+    #if((entity1.getX()+entity1.getWidth()>=entity2.getX())&&(
   }
 
 
