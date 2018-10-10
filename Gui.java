@@ -7,8 +7,8 @@ public class Gui extends JFrame{
 	private JButton pm_one,pm_two,pm_three;
 	
 	private JMenuBar menu;
-    private JMenu options;
-    private JMenuItem quit, help, newGame; 
+    	private JMenu options;
+    	private JMenuItem quit, help, newGame; 
 	
 	public Gui() {
 		super("Pac Man");
