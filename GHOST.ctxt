@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=GHOST
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ GHOST\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=loc\ c
+comment1.target=GHOST(Location,\ GHOST.color)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ GHOST\r\n
+comment2.params=
+comment2.target=GHOST.color\ getColor()
+comment3.params=c
+comment3.target=void\ steColor(GHOST.color)
+numComments=4

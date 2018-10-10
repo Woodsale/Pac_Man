@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=GAMELOGIC
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ GAMELOGIC\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=GAMELOGIC()
+comment2.params=pm\ g
+comment2.target=boolean\ collide(ENTITY,\ ENTITY)
+numComments=3
