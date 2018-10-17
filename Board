@@ -1,5 +1,9 @@
 import java.util.Random;
 
+
+/**
+Author: Chase
+*/
 public class board {
 	int[][] board1temp = {
 			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
