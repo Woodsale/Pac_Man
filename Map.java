@@ -7,7 +7,7 @@ public class Map extends Rectangle{
 	/*Might include input for what map level*/
 	}
 	
-	public void render(Graphics g) {
+	private int[][] getBoard() {
 		int[][] board = {
 				{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 				{0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0},
@@ -40,6 +40,11 @@ public class Map extends Rectangle{
 				{0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0},
 				{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
 		};
+		return board; 
+	}
+	
+	public void render(Graphics g) {
+		int[][] board = getBoard();
 		for(int i=0;(i*20)<(board[0].length*20);i++) {
 			for(int j=0;(j*20)<(board.length*20);j++) {
 				if(board[j][i] == 0) {
@@ -65,5 +70,10 @@ public class Map extends Rectangle{
 				}
 			}
 		}*/
+	}
+	/*Checks if its a pellot or a wall*/
+	public int getType(int x, int y){
+		int[][] board = getBoard();
+		return board[x][y];
 	}
 }
