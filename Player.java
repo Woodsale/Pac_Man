@@ -15,7 +15,7 @@ public class Player extends Rectangle{
 		yLocation = y;
 	}
 	/*Allows for movement*/
-	public void tick() {
+	public void move() {
 		if(right && collision(xLocation,yLocation) == false) {
 			x+=speed;
 		}
