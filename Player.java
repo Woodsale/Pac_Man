@@ -16,16 +16,16 @@ public class Player extends Rectangle{
 	}
 	/*Allows for movement*/
 	public void tick() {
-		if(right && collision(xLocation,yLocation) == true) {
+		if(right && collision(xLocation,yLocation) == false) {
 			x+=speed;
 		}
-		if(left && collision(xLocation,yLocation) == true) {
+		if(left && collision(xLocation,yLocation) == false) {
 			x-=speed;
 		}
-		if(up && collision(xLocation,yLocation) == true) {
+		if(up && collision(xLocation,yLocation) == false) {
 			y-=speed;
 		}
-		if(down && collision(xLocation,yLocation) == true) {
+		if(down && collision(xLocation,yLocation) == false) {
 			y+=speed;
 		}
 		//System.out.println(getLocation());
@@ -33,7 +33,7 @@ public class Player extends Rectangle{
 	
 	/*Checks if the location is okay to go to*/
 	private boolean collision(int xMove, int yMove) {
-		return true;
+		return false;
 	}
 	
 	/*Creates the pac man rectangle on the board*/
