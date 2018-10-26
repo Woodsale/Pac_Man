@@ -48,9 +48,9 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		}
 	}
 	
-	private void tick() {
-		player.tick();
-		playerTwo.tick();
+	private void move() {
+		player.move();
+		playerTwo.move();
 	}
 	
 	private void render() {
@@ -89,7 +89,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 			lastTime = now;
 			//System.out.println("X is: "+x);
 			while(x>=1) {
-				tick();
+				move();
 				render();
 				fps++;
 				x--;
