@@ -5,19 +5,15 @@
  * @author (your name)
  * @version (a version number or a date)
  */
-public abstract class ENTITY
+public abstract class ENTITY extends Rectangle 
 {
     protected Location myLocation;
-    protected Location startLocation;
     private type myType;
     
-    public static enum direction{
-        LEFT,RIGHT,UP,DOWN;
-    }
+
     public static enum type{
-        PACMAN,GHOST;
+        PACMAN,GHOST, WALL, PELLET;
     }
-    // instance variables - replace the example below with your own
    
     /**
      * Constructor for objects of class ENTITY
@@ -45,5 +41,25 @@ public abstract class ENTITY
       myType = t;  
     }
     
-
+    public boolean noMoveCollision(ENTITY 1, ENTITY 2){
+        while(1.getLocation() == 2.getLocation(){
+     if(1.getType() == 2.getType())
+         return false;
+     else if(1.getType() == PELLET || 2.getType() == PELLET)
+         return false;
+     else if(1.getType() == WALL || 2.getType() == WALL)
+         return true;  
+        }
+    }
+    
+    public boolean loseLifeCollision(ENTITY 1, ENTITY 2){
+             while(1.getLocation() == 2.getLocation(){
+     if(1.getType() == 2.getType())
+         return false;
+     else if(1.getType() == PELLET || 2.getType() == PELLET)
+         return false;
+     else if(1.getType() == GHOST || 2.getType() == GHOST)
+         return true;  
+        }   
+    }
 }
