@@ -7,8 +7,17 @@ public class Map extends Rectangle{
 	/*Might include input for what map level*/
 	}
 	
+	private type tile;
+	
+	public static enum type{WALL,PELLOT};
+	
 	private int[][] getBoard() {
 		int[][] board = {
+				/**
+				 * 0 = Wall
+				 * 1 = pellot tile
+				 * 2 = no pellot tile
+				 * */
 				{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 				{0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,0},
 				{0,1,0,0,0,1,0,0,1,0,1,0,0,1,0,0,0,1,0},
@@ -42,6 +51,19 @@ public class Map extends Rectangle{
 		};
 		return board; 
 	}
+	
+	/*public int[][] getBoadWalls(int x){
+		int[][] board = getBoard();
+		int[][] b = new int [board.length][board[0].length];
+		for(int i = 0;i<board.length;i++) {
+			for(int j= 0;j<board[0].length;j++) {
+				if(x == 0) {
+					board[i][j] = 0;
+				}
+			}
+		}
+		return board;
+	}*/
 	
 	public void render(Graphics g) {
 		int[][] board = getBoard();

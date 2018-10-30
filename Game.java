@@ -50,7 +50,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	
 	private void move() {
 		player.move();
-		playerTwo.move();
+		playerTwo.move();	
 	}
 	
 	private void render() {
@@ -94,7 +94,6 @@ public class Game extends Canvas implements Runnable,KeyListener{
 				fps++;
 				x--;
 			}
-			//the If below is for printing fps
 			/*if(System.currentTimeMillis() - timer > 1000) {
 				System.out.println(fps+" "+x);
 				fps = 0;
