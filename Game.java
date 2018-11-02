@@ -50,7 +50,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	
 	private void move() {
 		player.move();
-		playerTwo.move();
+		playerTwo.move();	
 	}
 	
 	private void render() {
@@ -77,7 +77,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		int fps = 0;//current time
 		//double timer = System.currentTimeMillis();
 		long lastTime = System.nanoTime();
-		double targetTick = 60.0;//target fps
+		double targetTick = 180.0;//target fps
 		double x = 0;//var that will modify fps to become targeted fps
 		double nanosec = 1000000000/targetTick;
 		
@@ -94,7 +94,6 @@ public class Game extends Canvas implements Runnable,KeyListener{
 				fps++;
 				x--;
 			}
-			//the If below is for printing fps
 			/*if(System.currentTimeMillis() - timer > 1000) {
 				System.out.println(fps+" "+x);
 				fps = 0;
