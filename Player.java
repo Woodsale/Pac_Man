@@ -9,53 +9,80 @@ public class Player extends Rectangle{
 	private int speed = 1;
 	private int xLocation,yLocation;
 	
+	private int size;
+	
 	/**/
 	public Player(int x, int y) {
-		setBounds(x,y,20,20);//locx,locy,sizex,sizey
-		
+		size = 17;
+		setBounds(x,y,size,size);//locx,locy,sizex,sizey
+	
 	}
 	
 	/*Allows for movement*/
 	public void move() {
-		ArrayList<Rectangle> wallList = new ArrayList<Rectangle>();
-		wallList = Map.getMap();
+		Rectangle r = new Rectangle();
+		r.setBounds(40,40,20,20);
+		ArrayList<Rectangle> list = new ArrayList<Rectangle>();
+		list = Map.getMap();
 		
-			Rectangle r = new Rectangle();
-			r.setBounds(40,40,20,20);
-		
-			if(right) {
-				for(int i = 0;i<wallList.size();i++) {
-					if(collision(x+speed,y,wallList.get(i)) == false){
-						x+=speed;
-						break;
-					}
+		boolean c = false;
+		if(right) {
+			for(int i = 0;i<list.size();i++) {
+				r = list.get(i);
+				if(collision(x+speed,y,r) == true){
+					c = true;
 				}
 			}
-			else if(left) {
-				for(int i = 0;i<wallList.size();i++) {
-					if(collision(x-speed,y,wallList.get(i)) == false){
-						x-=speed;
-						break;
-					}
+			if(c == false){
+				x+=speed;
+			}/*
+			if(collision(x+speed,y,r) == false){
+				x+=speed;
+			}*/
+		}
+		if(left) {
+			for(int i = 0;i<list.size();i++) {
+				r = list.get(i);
+				if(collision(x-speed,y,r) == true){
+					c = true;
 				}
 			}
-			else if(up) {
-				for(int i = 0;i<wallList.size();i++) {
-					if(collision(x,y-speed,wallList.get(i)) == false){
-						y-=speed;
-						break;
-					}
+			if(c == false){
+				x-=speed;
+			}/*
+			if(collision(x-speed,y,r) == false){
+				x-=speed;
+			}*/
+		}
+		if(up) {
+			for(int i = 0;i<list.size();i++) {
+				r = list.get(i);
+				if(collision(x,y-speed,r) == true){
+					c = true;
 				}
 			}
-			else if(down) {
-				for(int i = 0;i<wallList.size();i++) {
-					if(collision(x,y+speed,wallList.get(i)) == false){
-						y+=speed;
-						break;
-					}
+			if(c == false){
+				y-=speed;
+			}/*
+			if(collision(x,y-speed,r) == false){
+				y-=speed;
+			}*/
+		}
+		if(down) {
+			for(int i = 0;i<list.size();i++) {
+				r = list.get(i);
+				if(collision(x,y+speed,r) == true){
+					c = true;
 				}
 			}
-		
+			if(c == false){
+				y+=speed;
+			}/*
+			if(collision(x,y+speed,r) == false){
+				y+=speed;
+			}*/
+		}
+
 		//System.out.println(getLocation()+" " + x + " "+ y);
 	}
 	
@@ -73,10 +100,8 @@ public class Player extends Rectangle{
 	
 	/*Checks if the location is okay to go to*/
 	private boolean collision(int xDir, int yDir, Rectangle entity2) {
-		if ((xDir+20 > entity2.getX()) && 
-				(xDir < entity2.getX() + entity2.getWidth()) && 
-				(yDir+20 > entity2.getY()) && 
-				(yDir < entity2.getY()+entity2.getHeight())) {
+		if ((xDir+size > entity2.getX()) && (xDir < entity2.getX() + entity2.getWidth()) && 
+			(yDir+size > entity2.getY()) &&	(yDir < entity2.getY()+entity2.getHeight())) {
 			return true;
 		}
 		return false;
