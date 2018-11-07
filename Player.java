@@ -7,13 +7,12 @@ public class Player extends Rectangle{
 	/*Speed is how many pixels every tick
 	 * whcih should be at 60 fps*/
 	private int speed = 1;
-	private int xLocation,yLocation;
 	
 	private int size;
 	
 	/**/
 	public Player(int x, int y) {
-		size = 17;
+		size = 20;
 		setBounds(x,y,size,size);//locx,locy,sizex,sizey
 	
 	}
@@ -25,15 +24,15 @@ public class Player extends Rectangle{
 		ArrayList<Rectangle> list = new ArrayList<Rectangle>();
 		list = Map.getMap();
 		
-		boolean c = false;
+		boolean cx = false, cy = false;
 		if(right) {
 			for(int i = 0;i<list.size();i++) {
 				r = list.get(i);
 				if(collision(x+speed,y,r) == true){
-					c = true;
+					cx = true;
 				}
 			}
-			if(c == false){
+			if(cx == false){
 				x+=speed;
 			}/*
 			if(collision(x+speed,y,r) == false){
@@ -44,10 +43,10 @@ public class Player extends Rectangle{
 			for(int i = 0;i<list.size();i++) {
 				r = list.get(i);
 				if(collision(x-speed,y,r) == true){
-					c = true;
+					cx = true;
 				}
 			}
-			if(c == false){
+			if(cx == false){
 				x-=speed;
 			}/*
 			if(collision(x-speed,y,r) == false){
@@ -58,10 +57,10 @@ public class Player extends Rectangle{
 			for(int i = 0;i<list.size();i++) {
 				r = list.get(i);
 				if(collision(x,y-speed,r) == true){
-					c = true;
+					cy = true;
 				}
 			}
-			if(c == false){
+			if(cy == false){
 				y-=speed;
 			}/*
 			if(collision(x,y-speed,r) == false){
@@ -72,10 +71,10 @@ public class Player extends Rectangle{
 			for(int i = 0;i<list.size();i++) {
 				r = list.get(i);
 				if(collision(x,y+speed,r) == true){
-					c = true;
+					cy = true;
 				}
 			}
-			if(c == false){
+			if(cy == false){
 				y+=speed;
 			}/*
 			if(collision(x,y+speed,r) == false){
@@ -86,22 +85,10 @@ public class Player extends Rectangle{
 		//System.out.println(getLocation()+" " + x + " "+ y);
 	}
 	
-	/*private boolean collision(int x,int y) {
-		int[][] board = Map.getBoard();
-		Rectangle r = new Rectangle();
-		r.setBounds(40,40,20,20);
-		
-		if( this.contains(r.getLocation()) == true) {
-			System.out.println("HI");
-			return true;
-		}
-		return false;
-	}*/
-	
 	/*Checks if the location is okay to go to*/
 	private boolean collision(int xDir, int yDir, Rectangle entity2) {
 		if ((xDir+size > entity2.getX()) && (xDir < entity2.getX() + entity2.getWidth()) && 
-			(yDir+size > entity2.getY()) &&	(yDir < entity2.getY()+entity2.getHeight())) {
+			(yDir+size > entity2.getY()) &&	(yDir < entity2.getY() + entity2.getHeight())) {
 			return true;
 		}
 		return false;
@@ -111,5 +98,17 @@ public class Player extends Rectangle{
 	public void render(Graphics g) {
 		g.setColor(Color.yellow);
 		g.fillRect(x, y, width, height);
+		
+		/*Upper Left corner*/
+		/*g.setColor(Color.BLACK);
+		g.fillRect(x, y, 8,1);
+		g.setColor(Color.BLACK);
+		g.fillRect(x, y, 1,8);
+		g.setColor(Color.BLACK);
+		g.fillRect(x, y, 2,5);
+		g.setColor(Color.BLACK);
+		g.fillRect(x, y, 5,2);
+		g.setColor(Color.BLACK);
+		g.fillRect(x, y, 3, 3);*/
 	}
 }
