@@ -15,6 +15,10 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	
 	public static Player player;
 	public static Player playerTwo;
+	public static Ghost blinky;
+	public static Ghost pinky;
+	public static Ghost inky;
+	public static Ghost clyde;
 	public static Map map;
 	//used for increasing map size for two players
 	/*private static int w;*/
@@ -29,6 +33,10 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		addKeyListener(this);
 		player = new Player(9*20,17*20);//input is location
 		playerTwo = new Player(10*20,17*20);// input is location
+		blinky = new Ghost(10*20,14*20,1);
+		pinky = new Ghost(10*20,15*20,2);
+		inky = new Ghost(9*20,15*20,3);
+		clyde = new Ghost(9*20,14*20,4);
 		map = new Map(); 
 	}
 	
@@ -51,6 +59,10 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	private void move() {
 		player.move();
 		playerTwo.move();	
+		blinky.move();
+		pinky.move();
+		inky.move();
+		clyde.move();
 	}
 	
 	private void render() {
@@ -64,6 +76,10 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
 		player.render(g);
 		playerTwo.render(g);
+		blinky.render(g);
+		pinky.render(g);
+		inky.render(g);
+		clyde.render(g);
 		map.render(g);
 		g.dispose();
 		bs.show();
