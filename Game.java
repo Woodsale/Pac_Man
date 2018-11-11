@@ -8,20 +8,20 @@ import javax.swing.*;
 
 public class Game extends Canvas implements Runnable,KeyListener{
 	private boolean isRunning = false;
-	public static final int WIDTH = 380, HEIGHT = 600;//480,640 
+	public static final int WIDTH = 380, HEIGHT = 640;//480,640 
 	public static final String TITLE = "Pac Man";  
 	
 	private Thread thread;
 	
 	public static Player player;
 	public static Player playerTwo;
+	public static Player one;
+	public static Player two;
 	public static Ghost blinky;
 	public static Ghost pinky;
 	public static Ghost inky;
 	public static Ghost clyde;
 	public static Map map;
-	//used for increasing map size for two players
-	/*private static int w;*/
 	
 	public static boolean twoPlayer = false;
 	
@@ -31,12 +31,14 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		setMinimumSize(dimension);
 		setMaximumSize(dimension);
 		addKeyListener(this);
-		player = new Player(9*20,17*20);//input is location
-		playerTwo = new Player(10*20,17*20);// input is location
-		blinky = new Ghost(10*20,14*20,1);
-		pinky = new Ghost(10*20,15*20,2);
-		inky = new Ghost(9*20,15*20,3);
-		clyde = new Ghost(9*20,14*20,4);
+		player = new Player(9*20,19*20);//input is location
+		playerTwo = new Player(19*20,19*20);// input is location
+		one = new Player(16*20,1*20);
+		two = new Player(17*20,1*20);
+		blinky = new Ghost(10*20,16*20,1);
+		pinky = new Ghost(10*20,17*20,2);
+		inky = new Ghost(9*20,17*20,3);
+		clyde = new Ghost(9*20,16*20,4);
 		map = new Map(); 
 	}
 	
@@ -74,13 +76,15 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		Graphics g = bs.getDrawGraphics();
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
+		map.render(g);
+		one.render(g);
+		two.render(g);
 		player.render(g);
 		playerTwo.render(g);
 		blinky.render(g);
 		pinky.render(g);
 		inky.render(g);
 		clyde.render(g);
-		map.render(g);
 		g.dispose();
 		bs.show();
 	}
@@ -110,11 +114,6 @@ public class Game extends Canvas implements Runnable,KeyListener{
 				fps++;
 				x--;
 			}
-			/*if(System.currentTimeMillis() - timer > 1000) {
-				System.out.println(fps+" "+x);
-				fps = 0;
-				timer+=1000;
-			}*/
 		}
 		stop();
 	}

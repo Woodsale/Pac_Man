@@ -138,7 +138,7 @@ public class Player extends Rectangle{
 			g.fillRect(x, y+8, 5,4);
 			g.fillRect(x, y+9, 9,2);
 		}
-		else if(a>90&&a<119) {
+		if(a>90&&a<119) {
 			g.setColor(Color.BLACK);
 			g.fillRect(x, y+7, 5,6);
 			g.fillRect(x, y+8, 10,4);

@@ -7,9 +7,13 @@ public class Ghost extends Rectangle{
 	 * whcih should be at 180 fps*/
 	
 	private int speed = 1;
-	private int a = 0,b = 0,c = 0,moveX = 0,moveY = 0, ghost = 0;
+	private int a = 0; /*Total seconds*/
+	private int b = 0; /*Frames in that second*/
+	private int c = 0; /*First few seconds*/
+	private int moveX = 0,moveY = 0, ghost = 0;
 	private int size;
 	Random ran = new Random();
+	static int asdf; 
 	
 	/**/
 	public Ghost(int x, int y,int ghost) {
