@@ -21,19 +21,28 @@ public class Player extends Rectangle{
 	
 	/*Allows for movement*/
 	public void move() {
+		boolean cx = false, cy = false;
 		Rectangle r = new Rectangle();
 		r.setBounds(40,40,20,20);
 		ArrayList<Rectangle> list = new ArrayList<Rectangle>();
-		list = Map.getMap();
+		list = Map.getMap(0);
 		
-		/*b++;
-		if(b > 180) {
-			moveX = ran.nextInt(2);
-			moveY = ran.nextInt(2);
-			b = 0;
-		}*/
+		Rectangle p = new Rectangle();
+		p.setBounds(60,60,20,20);
+		ArrayList<Rectangle> pellets = new ArrayList<Rectangle>();
+		pellets = Map.getMap(1);
 		
-		boolean cx = false, cy = false;
+		for(int ii = 0;ii < pellets.size(); ii++) {
+			p = pellets.get(ii);
+			if(collision(x,y,p)) {
+				//add 10 to score
+				Game.playerOneScore = Game.playerOneScore + 10;
+				System.out.println(Game.playerOneScore);
+				Map.changeBoardValue((int)(p.getX()/20), (int)(p.getY()/20), 3);
+			}
+		}
+		
+		/*Checks for collision against wall*/
 		if(right) {//moveX=0
 			for(int i = 0;i<list.size();i++) {
 				r = list.get(i);
@@ -78,8 +87,6 @@ public class Player extends Rectangle{
 				y+=speed;
 			}
 		}
-
-		//System.out.println(getLocation()+" " + x + " "+ y);
 	}
 	
 	/*Checks if the location is okay to go to*/

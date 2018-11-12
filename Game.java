@@ -23,6 +23,9 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	public static Ghost clyde;
 	public static Map map;
 	
+	public static int playerOneScore = 0;
+	public static int playerTwoScore = 0;
+	
 	public static boolean twoPlayer = false;
 	
 	public Game() {
@@ -56,6 +59,23 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		}catch(InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void setScore(int score, int player) {
+		if(player == 1) {
+			playerOneScore = score;
+		}else if(player == 2){
+			playerTwoScore = score;
+		}
+	}
+	
+	public int getScore(int player) {
+		if(player == 1) {
+			return playerOneScore;
+		}else if(player == 2) {
+			return playerTwoScore;
+		}
+		return 0;
 	}
 	
 	private void move() {

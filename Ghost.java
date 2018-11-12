@@ -19,7 +19,7 @@ public class Ghost extends Rectangle{
 	public Ghost(int x, int y,int ghost) {
 		size = 20;
 		setBounds(x,y,size,size);//locx,locy,sizex,sizey
-		ran.setSeed(System.currentTimeMillis()+ghost+(ghost*System.currentTimeMillis()));
+		ran.setSeed(System.currentTimeMillis()+ghost);
 		setGhost(ghost);
 	}
 	
@@ -36,7 +36,7 @@ public class Ghost extends Rectangle{
 		Rectangle r = new Rectangle();
 		r.setBounds(40,40,20,20);
 		ArrayList<Rectangle> list = new ArrayList<Rectangle>();
-		list = Map.getMap();
+		list = Map.getMap(0);
 		
 		/*used for calc movement*/
 		a++;
