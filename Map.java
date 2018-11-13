@@ -48,10 +48,7 @@ public class Map extends Rectangle{
 	public void Map() {
 	/*Might include input for what map level*/
 	}
-	private type tile;
 	
-	public static enum type{WALL,PELLOT};
-
 	public static int[][] getBoard() {
 		return board; 
 	}
@@ -177,14 +174,110 @@ public class Map extends Rectangle{
 						g.setColor(Color.YELLOW);
 						g.fillRect((1+i*20), (5+j*20), 2, 2);
 						g.fillRect((1+i*20), (13+j*20), 2, 2);
+					}else if(i == 7 && j == 1) {
+						drawNumber(g,7,Game.playerScoreDigit(1,7));
+					}else if(i == 8 && j == 1) {
+						drawNumber(g,8,Game.playerScoreDigit(1,6));
+					}else if(i == 9 && j == 1) {
+						drawNumber(g,9,Game.playerScoreDigit(1,5));
+					}else if(i == 10 && j == 1) {
+						drawNumber(g,10,Game.playerScoreDigit(1,4));
+					}else if(i == 11 && j == 1) {
+						drawNumber(g,11,Game.playerScoreDigit(1,3));
+					}else if(i == 12 && j == 1) {
+						drawNumber(g,12,Game.playerScoreDigit(1,2));
+					}else if(i == 13 && j == 1) {
+						drawNumber(g,13,Game.playerScoreDigit(1,1));
+					}else if(i == 14 && j == 1) {
+						drawNumber(g,14,Game.playerScoreDigit(1,0));
 					}
 				}else if(board[j][i] == 3) {
+					//drawBLANK(g,j,i);
 					g.setColor(Color.BLACK);
 					g.fillRect((i*20), (j*20), 20, 20);
 				}
 			}
 		}
 	}
+	
+	/*//Doesn't Work, removes blocks unitentually
+	 * private void drawBLANK(Graphics g, int j, int i) {
+		g.setColor(Color.BLACK);
+		g.fillRect((j*20), (i*20), 20, 20);
+	}*/
+	
+	private void drawNumber(Graphics g, int x, int num) {
+		if(num == 0) {drawZero(g,x);}
+		else if(num == 1) {drawOne(g,x);}
+		else if(num == 2) {drawTwo(g,x);}
+		else if(num == 3) {drawThree(g,x);}
+		else if(num == 4) {drawFour(g,x);}
+		else if(num == 5) {drawFive(g,x);}
+		else if(num == 6) {drawSix(g,x);}
+		else if(num == 7) {drawSeven(g,x);}
+		else if(num == 9) {drawNine(g,x);}
+	}
+	
+	private void drawZero(Graphics g,int x) {
+		g.setColor(Color.BLACK);
+		g.fillRect((3+x*20), (6+20), 14, 8);
+		g.setColor(Color.YELLOW);	
+		g.fillRect((1+x*20), (9+20), 2, 2);
+		g.fillRect((17+x*20), (9+20), 2, 2);
+	}
+	
+	private void drawOne(Graphics g, int x) {
+		g.setColor(Color.BLACK);
+		g.fillRect((3+x*20), (20), 20, 20);
+		g.setColor(Color.YELLOW);	
+		g.fillRect((1+x*20), (9+20), 2, 2);
+	}
+	
+	private void drawTwo(Graphics g,int x) {
+		g.setColor(Color.BLACK);
+		g.fillRect((1+x*20), (4+20), 2, 5);
+		g.fillRect((17+x*20), (11+20), 2, 5);
+	}
+	
+	private void drawThree(Graphics g, int x) {
+		g.setColor(Color.BLACK);
+		g.fillRect((1+x*20), (4+20), 2, 5);
+		g.fillRect((1+x*20), (11+20), 2, 5);
+	}
+	
+	private void drawFour(Graphics g, int x) {
+		g.setColor(Color.BLACK);
+		g.fillRect((1+x*20), (11+20), 2, 5);
+		g.fillRect((3+x*20), (2+20), 14, 2);
+		g.fillRect((3+x*20), (16+20), 14, 2);
+	} 
+	
+	private void drawFive(Graphics g, int x) {
+		g.setColor(Color.BLACK);
+		g.fillRect((17+x*20), (4+20), 2, 5);
+		g.fillRect((1+x*20), (11+20), 2, 5);
+	}
+	
+	private void drawSix(Graphics g, int x) {
+		g.setColor(Color.BLACK);
+		g.fillRect((17+x*20), (4+20), 2, 5);
+	}
+	
+	private void drawSeven(Graphics g, int x) {
+		g.setColor(Color.BLACK);
+		/*Bars*/
+		g.fillRect((3+x*20), (9+20), 14, 2);
+		g.fillRect((3+x*20), (16+20), 14, 2);
+		/*Vertical Bars*/
+		g.fillRect((1+x*20), (4+20), 2, 5);
+		g.fillRect((1+x*20), (11+20), 2, 5);
+	}
+	
+	private void drawNine(Graphics g, int x) {
+		g.setColor(Color.BLACK);
+		g.fillRect((1+x*20), (11+20), 2, 5);
+	}
+	
 
 	/*Checks if its a pellot or a wall*/
 	public int getType(int x, int y){

@@ -10,8 +10,7 @@ public class Player extends Rectangle{
 	private int speed = 1;
 	private static int a = 0,b = 0,moveX = 0,moveY = 0;
 	private int size;
-	
-	Random ran = new Random();
+	boolean winPrint;
 	
 	/**/
 	public Player(int x, int y) {
@@ -21,6 +20,7 @@ public class Player extends Rectangle{
 	
 	/*Allows for movement*/
 	public void move() {
+		winPrint = true;
 		boolean cx = false, cy = false;
 		Rectangle r = new Rectangle();
 		r.setBounds(40,40,20,20);
@@ -39,9 +39,13 @@ public class Player extends Rectangle{
 				Game.playerOneScore = Game.playerOneScore + 10;
 				System.out.println(Game.playerOneScore);
 				Map.changeBoardValue((int)(p.getX()/20), (int)(p.getY()/20), 3);
+				pellets.remove(p);
 			}
 		}
-		
+		if(pellets.size() == 0 && winPrint == true) {
+			System.out.println("You Win!");
+			winPrint = false;
+		}
 		/*Checks for collision against wall*/
 		if(right) {//moveX=0
 			for(int i = 0;i<list.size();i++) {

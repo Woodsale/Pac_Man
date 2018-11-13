@@ -61,19 +61,15 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		}
 	}
 	
-	public void setScore(int score, int player) {
+	public static int playerScoreDigit(int player,int d) {
+		int a,b;
+		a = (int)Math.pow((double)10,(double)(d+1));
+		b = (int)Math.pow((double)10,(double)(d));
+	    
 		if(player == 1) {
-			playerOneScore = score;
-		}else if(player == 2){
-			playerTwoScore = score;
-		}
-	}
-	
-	public int getScore(int player) {
-		if(player == 1) {
-			return playerOneScore;
+			return (playerOneScore%a)/b;
 		}else if(player == 2) {
-			return playerTwoScore;
+			
 		}
 		return 0;
 	}
