@@ -14,6 +14,7 @@ public class Main {
 		frame.pack();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
+		frame.requestFocus();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		game.start();
 		

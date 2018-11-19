@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -23,6 +24,15 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	public static Ghost clyde;
 	public static Map map;
 	
+	public static int timer = 0;
+	public static int invTime = 3;
+	public static int p1InvTimer = 0;
+	public static boolean p1inv = false;
+	
+	public static int level = 1;
+	public static int p1LivesRemaining = 3;
+	public static int p1NextLife = 1;
+	
 	public static int playerOneScore = 0;
 	public static int playerTwoScore = 0;
 	
@@ -43,6 +53,52 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		inky = new Ghost(9*20,17*20,3);
 		clyde = new Ghost(9*20,16*20,4);
 		map = new Map(); 
+	}
+	
+	public static int playerLoc(int p, int v) {
+		/*0 for x and 1 for y*/
+		if(p == 1) {
+			if(v == 0) {
+				return ((int)player.getX());
+			}else if(v == 1){
+				return ((int)player.getY());
+			}
+		}else if(p == 2) {
+			if(v == 0) {
+				return ((int)playerTwo.getX());
+			}else if(v == 1){
+				return ((int)playerTwo.getY());
+			}
+		}else if(p == 3) {
+			if(v == 0) {
+				return ((int)blinky.getX());
+			}else if(v == 1){
+				return ((int)blinky.getY());
+			}
+		}
+		
+		return 0;
+	}
+	
+	public static void lifeCounter(boolean lost, int pm) {
+		if(lost == true && pm == 1) {
+			one.setLocation(-60,-60);
+		}else if(lost == true && pm == 2) {
+			two.setLocation(-80,-80);
+		}else if(lost == false && pm == 1){
+			one.setLocation(16*20,1*20);
+		}else if(lost == false && pm == 2) {
+			two.setLocation(17*20,1*20);
+		}
+	}
+	
+	public static ArrayList<Rectangle> getGhost() {
+		ArrayList<Rectangle> ghost = new ArrayList<Rectangle>();
+			ghost.add(blinky);
+			ghost.add(pinky);
+			ghost.add(inky);
+			ghost.add(clyde);
+		return ghost;
 	}
 	
 	public synchronized void start() {
@@ -77,10 +133,14 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	private void move() {
 		player.move();
 		playerTwo.move();	
-		blinky.move();
-		pinky.move();
-		inky.move();
-		clyde.move();
+		/*Makes them move slower*/
+		if(timer % (10*level) > 1) {
+			blinky.move();
+			pinky.move();
+			inky.move();
+			clyde.move();
+		}
+		timer++;
 	}
 	
 	private void render() {
@@ -158,9 +218,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		if(e.getKeyCode() == KeyEvent.VK_A) playerTwo.left = false;
 		if(e.getKeyCode() == KeyEvent.VK_W) playerTwo.up = false;
 		if(e.getKeyCode() == KeyEvent.VK_S) playerTwo.down = false;		
-
 	}
-
 	@Override
 	public void keyTyped(KeyEvent e) {}
 

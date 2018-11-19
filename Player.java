@@ -28,16 +28,36 @@ public class Player extends Rectangle{
 		list = Map.getMap(0);
 		
 		Rectangle p = new Rectangle();
-		p.setBounds(60,60,20,20);
 		ArrayList<Rectangle> pellets = new ArrayList<Rectangle>();
 		pellets = Map.getMap(1);
+		
+		Rectangle gs = new Rectangle();
+		ArrayList<Rectangle> ghosts = new ArrayList<Rectangle>();
+		ghosts = Game.getGhost();
+		
+		Rectangle gh = new Rectangle();
+		ArrayList<Rectangle> ghostHouse = new ArrayList<Rectangle>();
+		ghostHouse = Map.getMap(5);
+		
+		for(int jj = 0;jj < ghosts.size(); jj++) {
+			gs = ghosts.get(jj);
+			if(collision(x,y,gs) && Game.p1inv == false) {
+				Game.p1LivesRemaining = Game.p1LivesRemaining - 1;
+				Game.lifeCounter(true,Game.p1NextLife);
+				Game.p1NextLife++;
+				Game.p1inv = true;
+				Game.p1InvTimer = Game.timer;
+			}
+		}
+		
+		if(Game.timer > (Game.p1InvTimer + Game.invTime*180)) {
+			Game.p1inv = false;
+		}
 		
 		for(int ii = 0;ii < pellets.size(); ii++) {
 			p = pellets.get(ii);
 			if(collision(x,y,p)) {
-				//add 10 to score
-				Game.playerOneScore = Game.playerOneScore + 10;
-				System.out.println(Game.playerOneScore);
+				Game.playerOneScore = Game.playerOneScore + 35;
 				Map.changeBoardValue((int)(p.getX()/20), (int)(p.getY()/20), 3);
 				pellets.remove(p);
 			}
@@ -87,6 +107,12 @@ public class Player extends Rectangle{
 					cy = true;
 				}
 			}
+			for(int i = 0;i<ghostHouse.size();i++) {
+				gh = ghostHouse.get(i);
+				if(collision(x,y+speed,gh) == true){
+					cy = true;
+				}
+			}
 			if(cy == false){
 				y+=speed;
 			}
@@ -104,9 +130,13 @@ public class Player extends Rectangle{
 	
 	/*Creates the pac man rectangle on the board*/
 	public void render(Graphics g) {
-		g.setColor(Color.yellow);
+		if(((Game.timer % 90) > 45) && Game.p1inv == true) {
+			g.setColor(Color.BLACK);
+		}else {
+			g.setColor(Color.yellow);
+		}
 		g.fillRect(x, y, width, height);
-		
+
 		/*Upper Left corner*/
 		g.setColor(Color.BLACK);
 		g.fillRect(x, y, 7,1);
@@ -114,28 +144,28 @@ public class Player extends Rectangle{
 		g.fillRect(x, y, 3, 3);
 		g.fillRect(x, y, 5,2);
 		g.fillRect(x, y, 2,5);
-		
+
 		/*Lower Right corner*/
 		g.fillRect(width+x-7, height+y-1, 7,1);
 		g.fillRect(width+x-1, height+y-7, 1,7);
 		g.fillRect(width+x-3, height+y-3, 3,3);
 		g.fillRect(width+x-5, height+y-2, 5,2);
 		g.fillRect(width+x-2, height+y-5, 2,5);
-		
+
 		/*Upper Right corner*/
 		g.fillRect(width+x-7, y, 7,1);
 		g.fillRect(width+x-1, y, 1,7);
 		g.fillRect(width+x-3, y, 3,3);
 		g.fillRect(width+x-5, y, 5,2);
 		g.fillRect(width+x-2, y, 2,5);
-		
+
 		/*Lower Left corner*/
 		g.fillRect(x, height+y-1, 7,1);
 		g.fillRect(x, height+y-7, 1,7);
 		g.fillRect(x, height+y-3, 3,3);
 		g.fillRect(x, height+y-2, 5,2);
 		g.fillRect(x, height+y-5, 2,5);
-		
+
 		/*Draws the mouth*/
 		a++;
 		if(a > 180) {
