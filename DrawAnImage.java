@@ -1,4 +1,4 @@
-package TesterOne;
+
 
 
 import javax.imageio.ImageIO;
