@@ -22,16 +22,7 @@ public class mainMenu extends JFrame implements ActionListener
     private ButtonGroup difficultyChoice;
     
     private Game game;
-    
-//    public static void main(String args [])
-//    {
-//        mainMenu w = new mainMenu();
-//        w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        w.pack();
-//        w.setVisible(true);
-//        w.setTitle("Pac Man");
-//
-//    }
+
 
     public mainMenu()
     {   
