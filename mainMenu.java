@@ -10,8 +10,7 @@ import javax.swing.*;
 
 public class mainMenu extends JFrame implements ActionListener
 {
-    private JLabel newGame;
-    private JButton startGame, Exit, onePlayer, twoPlayer;
+    private JButton startGame, Exit;
 
     private JMenuBar menu;
     private JMenu options;
@@ -46,30 +45,8 @@ public class mainMenu extends JFrame implements ActionListener
         GridBagConstraints loc = new GridBagConstraints(); 
 
         loc = new GridBagConstraints();
-        loc.gridx = 0;
-        loc.gridy = 0;
-        loc.insets.bottom = 20;
-        loc.insets.top = 20;
-        newGame = new JLabel("New Game");
-        add(newGame, loc);
-
-        loc = new GridBagConstraints();
-        loc.gridx = 0;
-        loc.gridy = 1;
-        loc.insets.bottom = 20;
-        onePlayer = new JButton("One Player");
-        add(onePlayer, loc);
-
-        loc = new GridBagConstraints();
         loc.gridx = 1;
-        loc.gridy = 1;
-        loc.insets.bottom = 20;
-        twoPlayer = new JButton("Two Player");
-        add(twoPlayer, loc);
-
-        loc = new GridBagConstraints();
-        loc.gridx = 0;
-        loc.gridy = 2;
+        loc.gridy = 0;
         loc.insets.top = 20;
         loc.insets.bottom = 20;
         difficulty = new JLabel("Select Difficulty");
@@ -77,28 +54,28 @@ public class mainMenu extends JFrame implements ActionListener
 
         loc = new GridBagConstraints();
         loc.gridx = 0;
-        loc.gridy = 3;
+        loc.gridy = 1;
         loc.insets.bottom = 20;
         easy = new JCheckBox("Easy");
         add(easy, loc);
 
         loc = new GridBagConstraints();
         loc.gridx = 1;
-        loc.gridy = 3;
+        loc.gridy = 1;
         loc.insets.bottom = 20;
         medium = new JCheckBox("Medium");
         add(medium, loc);
 
         loc = new GridBagConstraints();
         loc.gridx = 2;
-        loc.gridy = 3;
+        loc.gridy = 1;
         loc.insets.bottom = 20;
         hard = new JCheckBox("Hard");
         add(hard, loc);
         
         loc = new GridBagConstraints();
-        loc.gridx = 0;
-        loc.gridy = 4;
+        loc.gridx = 1;
+        loc.gridy = 2;
         loc.insets.top = 20;
         startGame = new JButton("Start Game!");
         add(startGame, loc);
@@ -110,8 +87,7 @@ public class mainMenu extends JFrame implements ActionListener
         difficultyChoice.add(medium);
         difficultyChoice.add(hard);
 
-        onePlayer.addActionListener(this);
-        twoPlayer.addActionListener(this);
+        
         easy.addActionListener(this);
         medium.addActionListener(this);
         hard.addActionListener(this);
