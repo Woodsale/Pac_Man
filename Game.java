@@ -1,3 +1,5 @@
+package pacman;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -29,11 +31,9 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	public static int p1InvTimer = 0;
 	public static boolean p1inv = false;
 	
-	public static int difficulty = 1;
 	public static int level = 1;
 	public static int p1LivesRemaining = 3;
 	public static int p1NextLife = 1;
-	public static boolean gameOver = false;
 	
 	public static int playerOneScore = 0;
 	public static int playerTwoScore = 0;
@@ -56,7 +56,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		clyde = new Ghost(9*20,16*20,4);
 		map = new Map(); 
 	}
-	/**/
+	
 	public static int playerLoc(int p, int v) {
 		/*0 for x and 1 for y*/
 		if(p == 1) {
@@ -133,16 +133,14 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	}
 	
 	private void move() {
-		if(gameOver == false && timer > 180*5) {
-			player.move();
-			playerTwo.move();	
-			/*Makes them move slower*/
-			if(timer % (difficulty*5*level) > 1) {
-				blinky.move();
-				pinky.move();
-				inky.move();
-				clyde.move();
-			}
+		player.move();
+		playerTwo.move();	
+		/*Makes them move slower*/
+		if(timer % (10*level) > 1) {
+			blinky.move();
+			pinky.move();
+			inky.move();
+			clyde.move();
 		}
 		timer++;
 	}
@@ -165,7 +163,6 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		pinky.render(g);
 		inky.render(g);
 		clyde.render(g);
-
 		g.dispose();
 		bs.show();
 	}
@@ -201,28 +198,68 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	/*Manages Key presses from the Player(s)*/
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode() == KeyEvent.VK_RIGHT) player.right = true;
-		if(e.getKeyCode() == KeyEvent.VK_LEFT) player.left = true;
-		if(e.getKeyCode() == KeyEvent.VK_UP) player.up = true;
-		if(e.getKeyCode() == KeyEvent.VK_DOWN) player.down = true;
+		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			player.right = true;
+			player.direction = "right";
+		}
+		if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+			player.left = true;
+			player.direction = "left";
+		}
+		if(e.getKeyCode() == KeyEvent.VK_UP) {
+			player.up = true;
+			player.direction = "up";
+		}
+		if(e.getKeyCode() == KeyEvent.VK_DOWN) {
+			player.down = true;
+			player.direction = "down";
+		}
 	
-		if(e.getKeyCode() == KeyEvent.VK_D) playerTwo.right = true;
-		if(e.getKeyCode() == KeyEvent.VK_A) playerTwo.left = true;
-		if(e.getKeyCode() == KeyEvent.VK_W) playerTwo.up = true;
-		if(e.getKeyCode() == KeyEvent.VK_S) playerTwo.down = true;
+		if(e.getKeyCode() == KeyEvent.VK_D) {
+			playerTwo.right = true;
+			playerTwo.direction = "right";
+		}
+		if(e.getKeyCode() == KeyEvent.VK_A) {
+			playerTwo.left = true;
+			playerTwo.direction = "left";
+		}
+		if(e.getKeyCode() == KeyEvent.VK_W) {
+			playerTwo.up = true;
+			playerTwo.direction = "up";
+		}
+		if(e.getKeyCode() == KeyEvent.VK_S) {
+			playerTwo.down = true;
+			playerTwo.direction = "down";
+		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if(e.getKeyCode() == KeyEvent.VK_RIGHT) player.right = false;
-		if(e.getKeyCode() == KeyEvent.VK_LEFT) player.left = false;
-		if(e.getKeyCode() == KeyEvent.VK_UP) player.up = false;
-		if(e.getKeyCode() == KeyEvent.VK_DOWN) player.down = false;
+		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			player.right = false;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+			player.left = false;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_UP) {
+			player.up = false;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_DOWN) {
+			player.down = false;
+		}
 		
-		if(e.getKeyCode() == KeyEvent.VK_D) playerTwo.right = false;
-		if(e.getKeyCode() == KeyEvent.VK_A) playerTwo.left = false;
-		if(e.getKeyCode() == KeyEvent.VK_W) playerTwo.up = false;
-		if(e.getKeyCode() == KeyEvent.VK_S) playerTwo.down = false;		
+		if(e.getKeyCode() == KeyEvent.VK_D) {
+			playerTwo.right = false;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_A) {
+			playerTwo.left = false;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_W) {
+			playerTwo.up = false;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_S) {
+			playerTwo.down = false;		
+		}
 	}
 	@Override
 	public void keyTyped(KeyEvent e) {}
