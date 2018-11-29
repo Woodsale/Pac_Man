@@ -47,6 +47,9 @@ public class Player extends Rectangle{
 				Game.p1NextLife++;
 				Game.p1inv = true;
 				Game.p1InvTimer = Game.timer;
+				if(Game.p1LivesRemaining <= 0) {
+					Game.gameOver = true;
+				}
 			}
 		}
 		
@@ -57,13 +60,13 @@ public class Player extends Rectangle{
 		for(int ii = 0;ii < pellets.size(); ii++) {
 			p = pellets.get(ii);
 			if(collision(x,y,p)) {
-				Game.playerOneScore = Game.playerOneScore + 35;
+				Game.playerOneScore = Game.playerOneScore + 5;
 				Map.changeBoardValue((int)(p.getX()/20), (int)(p.getY()/20), 3);
 				pellets.remove(p);
 			}
 		}
 		if(pellets.size() == 0 && winPrint == true) {
-			System.out.println("You Win!");
+			//System.out.println("You Win!");
 			winPrint = false;
 		}
 		/*Checks for collision against wall*/
