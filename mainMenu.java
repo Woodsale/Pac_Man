@@ -111,6 +111,7 @@ public class mainMenu extends JFrame implements ActionListener
         // put your code here
         JComponent buttonPressed = (JComponent) e.getSource();
         if (buttonPressed == startGame) {
+		if(easy.isSelected()||medium.isSelected()||hard.isSelected()){
         	this.dispose();
         	Game game = new Game();
 			JFrame frame = new JFrame();
@@ -123,6 +124,8 @@ public class mainMenu extends JFrame implements ActionListener
 			frame.requestFocus();
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			game.start();
+			}
+		else JOptionPane.showMessageDialog(null, "Please select a difficulty");
         }
         
         else if(buttonPressed == quit){
