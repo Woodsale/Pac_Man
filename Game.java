@@ -8,39 +8,89 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+/*****************************************************************
+Game class contains all of the logic and entity (Pacman/Ghost) information needed to play the Pacman game 
 
+@author Team 7
+@version Fall 2018
+*****************************************************************/
 public class Game extends Canvas implements Runnable,KeyListener{
+	/** indicates whether the game is playing */
 	private boolean isRunning = false;
+	
+	/** final dimensions for the game board (in pixels) */
 	public static final int WIDTH = 380, HEIGHT = 640;//480,640 
+	
+	/** title of the game */
 	public static final String TITLE = "Pac Man";  
 	
+	/** thread that updates as the game is played */
 	private Thread thread;
 	
+	/** Object of the player class - Player 1 */
 	public static Player player;
+	
+	/** Object of the player class - Player 2 */
 	public static Player playerTwo;
+	
+	/** Object of the player class - Player 1 */
 	public static Player one;
+	
+	/** Object of the player class - Player 2 */
 	public static Player two;
+	
+	/** Object of the ghost class - Red */
 	public static Ghost blinky;
+	
+	/** Object of the ghost class - Pink */
 	public static Ghost pinky;
+	
+	/** Object of the ghost class - Blue */
 	public static Ghost inky;
+	
+	/** Object of the ghost class - Orange */
 	public static Ghost clyde;
+	
+	/** Object of the map class */
 	public static Map map;
 	
+	/** Object of the ghost class - Pink */
 	public static int timer = 0;
+	
+	/** Invincible timer*/
 	public static int invTime = 3;
+	
+	/**Player 1 Invincible timer*/
 	public static int p1InvTimer = 0;
+	
+	/**Is Player 1 currently invincible?, initialized to false*/
 	public static boolean p1inv = false;
 	
+	/** Current level, intialized to 1*/
 	public static int level = 1;
+	
+	/** Player 1 lives remaining, initialized to 3*/
 	public static int p1LivesRemaining = 3;
+	
+	/** */
 	public static int p1NextLife = 1;
 	
+	/** Player 1 current score, intialized to 0*/
 	public static int playerOneScore = 0;
+	
+	/** Player 2 current score, intialized to 0*/
 	public static int playerTwoScore = 0;
 	
+	/** Is this a 2 player game?, initialized to false*/
 	public static boolean twoPlayer = false;
 	
+    /*****************************************************************
+    Constructor starts a new game, intializes players, ghosts, and draws the game board
+    @param size the length of each side in pixels
+    *****************************************************************/
 	public Game() {
+		
+		// initialize display characteristics 
 		Dimension dimension = new Dimension(Game.WIDTH,Game.HEIGHT);
 		setPreferredSize(dimension);
 		setMinimumSize(dimension);
@@ -57,6 +107,12 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		map = new Map(); 
 	}
 	
+    /*****************************************************************
+    Retuns the either the x or the y location of the requested entity
+    @param p - entity (player or ghost)
+    @param v - x or y location of the entity
+    @return int
+    *****************************************************************/
 	public static int playerLoc(int p, int v) {
 		/*0 for x and 1 for y*/
 		if(p == 1) {
@@ -82,6 +138,12 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		return 0;
 	}
 	
+    /*****************************************************************
+    Sets the location of the Player based whether or not they've lost a life
+    @param lost - entity (player or ghost)
+    @param pm - Player 1 or Player 2
+    @return none
+    *****************************************************************/
 	public static void lifeCounter(boolean lost, int pm) {
 		if(lost == true && pm == 1) {
 			one.setLocation(-60,-60);
@@ -94,6 +156,11 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		}
 	}
 	
+    /*****************************************************************
+    Returns a list of ghosts (represented by rectangles)
+    @param none
+    @return ArrayList<Rectangle>
+    *****************************************************************/
 	public static ArrayList<Rectangle> getGhost() {
 		ArrayList<Rectangle> ghost = new ArrayList<Rectangle>();
 			ghost.add(blinky);
@@ -102,12 +169,22 @@ public class Game extends Canvas implements Runnable,KeyListener{
 			ghost.add(clyde);
 		return ghost;
 	}
-	
+    /*****************************************************************
+    Starts the game play
+    @param none
+    @return none
+    *****************************************************************/
 	public synchronized void start() {
 		if(isRunning) return;
 		isRunning = true;
 		thread = new Thread(this);
 		thread.start();
+		
+    /*****************************************************************
+    Stops the game play
+    @param none
+    @return none
+    *****************************************************************/
 	}
 	public synchronized void stop(){
 		if(!isRunning) return;
@@ -118,7 +195,12 @@ public class Game extends Canvas implements Runnable,KeyListener{
 			e.printStackTrace();
 		}
 	}
-	
+    /*****************************************************************
+    Returns the given player's score
+    @param player - Player 1 or Player 2 
+    @param d
+    @return int
+    *****************************************************************/
 	public static int playerScoreDigit(int player,int d) {
 		int a,b;
 		a = (int)Math.pow((double)10,(double)(d+1));
@@ -195,7 +277,11 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		}
 		stop();
 	}
-	/*Manages Key presses from the Player(s)*/
+    /*****************************************************************
+    Manages the player's keypresses, and translates them to the GUI movement
+    @param e - KeyEvent
+    @return none
+    *****************************************************************/
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
