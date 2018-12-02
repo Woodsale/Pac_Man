@@ -1,12 +1,9 @@
-package pacman;
-
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
 /*****************************************************************
 Player within the Pacman game
-
 @author Team 7
 @version Fall 2018
 *****************************************************************/
@@ -14,17 +11,12 @@ public class Player extends Rectangle{
 	
 	/**Indicates direction the player is moving*/
 	public boolean up, down, left, right;
-	
-	/**Textual representation of the direction the player is moving*/
-	public String direction = "left";
-	
-	/**How many pixels every tick, initialized to 1*/
+	/*Speed is how many pixels every tick
+	 * whcih should be at 1 to get 180 fps*/
 	private int speed = 1;
 	private static int a = 0,b = 0,moveX = 0,moveY = 0;
-	
 	/**Size of the player in pixels*/
 	private int size;
-	
 	/**If the player has won*/
 	boolean winPrint;
 	
@@ -37,6 +29,7 @@ public class Player extends Rectangle{
 		size = 20;
 		setBounds(x,y,size,size);//locx,locy,sizex,sizey
 	}
+	
    /*****************************************************************
     Allows for Player movement
     @return none
@@ -60,7 +53,7 @@ public class Player extends Rectangle{
 		Rectangle gh = new Rectangle();
 		ArrayList<Rectangle> ghostHouse = new ArrayList<Rectangle>();
 		ghostHouse = Map.getMap(5);
-		
+		/*Tests for collision with ghosts*/
 		for(int jj = 0;jj < ghosts.size(); jj++) {
 			gs = ghosts.get(jj);
 			if(collision(x,y,gs) && Game.p1inv == false) {
@@ -69,6 +62,9 @@ public class Player extends Rectangle{
 				Game.p1NextLife++;
 				Game.p1inv = true;
 				Game.p1InvTimer = Game.timer;
+				if(Game.p1LivesRemaining <= 0) {
+					Game.gameOver = true;
+				}
 			}
 		}
 		
@@ -79,13 +75,14 @@ public class Player extends Rectangle{
 		for(int ii = 0;ii < pellets.size(); ii++) {
 			p = pellets.get(ii);
 			if(collision(x,y,p)) {
-				Game.playerOneScore = Game.playerOneScore + 35;
+				Game.playerOneScore = Game.playerOneScore + 5;
 				Map.changeBoardValue((int)(p.getX()/20), (int)(p.getY()/20), 3);
 				pellets.remove(p);
 			}
 		}
+		/*For testing and possible win cindidtions in the future*/
 		if(pellets.size() == 0 && winPrint == true) {
-			System.out.println("You Win!");
+			//System.out.println("You Win!");
 			winPrint = false;
 		}
 		/*Checks for collision against wall*/
@@ -129,6 +126,7 @@ public class Player extends Rectangle{
 					cy = true;
 				}
 			}
+			/*Keeps the player out of the middle*/
 			for(int i = 0;i<ghostHouse.size();i++) {
 				gh = ghostHouse.get(i);
 				if(collision(x,y+speed,gh) == true){
@@ -141,7 +139,7 @@ public class Player extends Rectangle{
 		}
 	}
 	
-   /*****************************************************************
+	/*****************************************************************
     Checks if the location is ok to go to
     @param xDir - x direction of entity1
     @param yDir - y direction of entity1
@@ -156,7 +154,7 @@ public class Player extends Rectangle{
 		return false;
 	}
 	
-   /*****************************************************************
+	/*****************************************************************
     Creates the Pacman rectangle on the board
     @param g - graphics contexr
     @return none
@@ -203,73 +201,19 @@ public class Player extends Rectangle{
 		if(a > 180) {
 			a = 0;
 		}
-		
-		if (direction == "left") {
-			if((a > 30 && a < 59) || (a > 150 && a < 180)) {
-				g.fillRect(x, y+8, 2,4);
-				g.fillRect(x, y+9, 7,2);
-			}
-			else if((a > 60 && a < 89) || (a > 120 && a < 149)) {
-				g.fillRect(x, y+8, 5,4);
-				g.fillRect(x, y+9, 9,2);
-			}
-			if(a>90&&a<119) {
-				g.setColor(Color.BLACK);
-				g.fillRect(x, y+7, 5,6);
-				g.fillRect(x, y+8, 10,4);
-				g.fillRect(x, y+9, 12,2);	
-			}
+		if((a > 30 && a < 59) || (a > 150 && a < 180)) {
+			g.fillRect(x, y+8, 2,4);
+			g.fillRect(x, y+9, 7,2);
 		}
-		if (direction == "right") {
-			if((a > 30 && a < 59) || (a > 150 && a < 180)) {
-				g.fillRect(x+size-2, y+8, 2,4);
-				g.fillRect(x+size-7, y+9, 7,2);
-			}
-			else if((a > 60 && a < 89) || (a > 120 && a < 149)) {
-				g.fillRect(x+size-5, y+8, 5,4);
-				g.fillRect(x+size-9, y+9, 9,2);
-			}
-			if(a>90&&a<119) {
-				g.setColor(Color.BLACK);
-				g.fillRect(x+size-5, y+7, 5,6);
-				g.fillRect(x+size-10, y+8, 10,4);
-				g.fillRect(x+size-12, y+9, 12,2);	
-			}
+		else if((a > 60 && a < 89) || (a > 120 && a < 149)) {
+			g.fillRect(x, y+8, 5,4);
+			g.fillRect(x, y+9, 9,2);
 		}
-		if (direction == "up") {
-			if((a > 30 && a < 59) || (a > 150 && a < 180)) {
-				g.fillRect(x+8, y, 4,2);
-				g.fillRect(x+9, y, 2,7);
-			}
-			else if((a > 60 && a < 89) || (a > 120 && a < 149)) {
-				g.fillRect(x+8, y, 4,5);
-				g.fillRect(x+9, y, 2,9);
-			}
-			if(a>90&&a<119) {
-				g.setColor(Color.BLACK);
-				g.fillRect(x+7, y, 6,5);
-				g.fillRect(x+8, y, 4,10);
-				g.fillRect(x+9, y, 2,12);
-			}
+		if(a>90&&a<119) {
+			g.setColor(Color.BLACK);
+			g.fillRect(x, y+7, 5,6);
+			g.fillRect(x, y+8, 10,4);
+			g.fillRect(x, y+9, 12,2);	
 		}
-		if (direction == "down") {
-			if((a > 30 && a < 59) || (a > 150 && a < 180)) {
-				g.fillRect(x+8, y+size-2, 4,2);
-				g.fillRect(x+9, y+size-7, 2,7);
-			}
-			else if((a > 60 && a < 89) || (a > 120 && a < 149)) {
-				g.fillRect(x+8, y+size-5, 4,5);
-				g.fillRect(x+9, y+size-9, 2,9);
-			}
-			if(a>90&&a<119) {
-				g.setColor(Color.BLACK);
-				g.fillRect(x+7, y+size-5, 6,5);
-				g.fillRect(x+8, y+size-10, 4,10);
-				g.fillRect(x+9, y+size-12, 2,12);
-			}
-		}
-		
 	}
-		
-	
 }
