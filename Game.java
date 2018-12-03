@@ -29,11 +29,9 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	public static int p1InvTimer = 0;
 	public static boolean p1inv = false;
 	
-	public static int difficulty = 1;
 	public static int level = 1;
 	public static int p1LivesRemaining = 3;
 	public static int p1NextLife = 1;
-	public static boolean gameOver = false;
 	
 	public static int playerOneScore = 0;
 	public static int playerTwoScore = 0;
@@ -56,7 +54,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		clyde = new Ghost(9*20,16*20,4);
 		map = new Map(); 
 	}
-	/**/
+	
 	public static int playerLoc(int p, int v) {
 		/*0 for x and 1 for y*/
 		if(p == 1) {
@@ -133,16 +131,14 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	}
 	
 	private void move() {
-		if(gameOver == false && timer > 180*5) {
-			player.move();
-			playerTwo.move();	
-			/*Makes them move slower*/
-			if(timer % (difficulty*5*level) > 1) {
-				blinky.move();
-				pinky.move();
-				inky.move();
-				clyde.move();
-			}
+		player.move();
+		playerTwo.move();	
+		/*Makes them move slower*/
+		if(timer % (10*level) > 1) {
+			blinky.move();
+			pinky.move();
+			inky.move();
+			clyde.move();
 		}
 		timer++;
 	}
@@ -165,7 +161,6 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		pinky.render(g);
 		inky.render(g);
 		clyde.render(g);
-
 		g.dispose();
 		bs.show();
 	}

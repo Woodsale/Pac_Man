@@ -1,4 +1,3 @@
-
 /**
  * Write a description of class Image here.
  *
@@ -24,12 +23,9 @@ public class mainMenu extends JFrame implements ActionListener
     
     private Game game;
 
+
     public mainMenu()
     {   
-    	Dimension d = new Dimension(Game.WIDTH,Game.HEIGHT);
-		setPreferredSize(d);
-		setMinimumSize(d);
-		setMaximumSize(d);
 
         setLayout(new BorderLayout());
         setContentPane(new JLabel(new ImageIcon("pac-man-minimalist-featured-image-1024x576.png")));
@@ -111,18 +107,16 @@ public class mainMenu extends JFrame implements ActionListener
         // put your code here
         JComponent buttonPressed = (JComponent) e.getSource();
         if (buttonPressed == startGame) {
-        	this.dispose();
-        	Game game = new Game();
-			JFrame frame = new JFrame();
-			frame.setTitle(Game.TITLE);
-			frame.add(game);
-			frame.setResizable(false);
-			frame.pack();
-			frame.setLocationRelativeTo(null);
-			frame.setVisible(true);
-			frame.requestFocus();
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			game.start();
+        	game = new Game();
+        	this.setTitle(Game.TITLE);
+    		this.add(game);
+    		this.setResizable(false);
+    		this.pack();
+    		this.setLocationRelativeTo(null);
+    		this.setVisible(true);
+    		this.requestFocus();
+    		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    		game.start();
         }
         
         else if(buttonPressed == quit){
