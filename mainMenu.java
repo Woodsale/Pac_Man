@@ -1,29 +1,42 @@
 
-/**
- * Write a description of class Image here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
+/*****************************************************************
+mainMenu class contains Menu for Pac Man game
+@author Team 7
+@version Fall 2018
+*****************************************************************/
 public class mainMenu extends JFrame implements ActionListener
 {
+    /** Buttons on the main menu*/
     private JButton startGame, Exit;
-
+    
+    /** Dropdown menu on the main menu*/
     private JMenuBar menu;
+    
+    /** Dropdown menu the main menu*/
     private JMenu options;
+    
+    /** Option menu items*/
     private JMenuItem quit, help; 
-
+    
+    /** Difficulty label*/
     private JLabel difficulty;
+    
+    /**Difficulty options*/
     private JCheckBox easy, medium, hard;
     
+    /** ButtonGroup for difficulty choices*/
     private ButtonGroup difficultyChoice;
     
+    /** Game object*/
     private Game game;
-
+    
+    /*****************************************************************
+Constructor for main menu
+*****************************************************************/
     public mainMenu()
     {   
     	Dimension d = new Dimension(Game.WIDTH,Game.HEIGHT);
@@ -99,35 +112,12 @@ public class mainMenu extends JFrame implements ActionListener
 		w.setVisible(true);
 		w.setTitle("Pac Man");
 
-		/*One player GUI*/
-		/*Game game = new Game();
-			JFrame frame = new JFrame();
-			frame.setTitle(Game.TITLE);
-			frame.add(game);
-			frame.setResizable(false);
-			frame.pack();
-			frame.setLocationRelativeTo(null);
-			frame.setVisible(true);
-			frame.requestFocus();
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			game.start();*/
-
-		/*Two Player GUI*/
-		/* Modifications should be in the Game class
-			Game game = new Game();
-			JFrame frame = new JFrame();
-			frame.setTitle(Game.TITLE);
-			frame.add(game);
-			frame.setResizable(false);
-			frame.pack();
-			frame.setLocationRelativeTo(null);
-			frame.setVisible(true);
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			game.start();
-		 */
-
 	}
 
+    /*****************************************************************
+Sets up Options menu
+@return None
+*****************************************************************/
     private void setUpMenus(){
         options = new JMenu("Options");
         quit = new JMenuItem("Quit");
@@ -143,9 +133,14 @@ public class mainMenu extends JFrame implements ActionListener
         help.addActionListener(this);
     }
 
+    /*****************************************************************
+Reads in the performed action
+@param e ActionEvent
+@return None
+*****************************************************************/
     public void actionPerformed(ActionEvent e)
     {
-        // put your code here
+        
         JComponent buttonPressed = (JComponent) e.getSource();
         if (buttonPressed == startGame) {
 		if(easy.isSelected()||medium.isSelected()||hard.isSelected()){
