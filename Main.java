@@ -1,10 +1,5 @@
 import javax.swing.JFrame;
-/*****************************************************************
-Main creates and displays the main menu for the Pacman game
 
-@author Team 7 
-@version Fall 2018
-*****************************************************************/
 public class Main {
 
 	public static void main(String[] args) {
