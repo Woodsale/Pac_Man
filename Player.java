@@ -2,24 +2,38 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
+/*****************************************************************
+Player within the Pacman game
+@author Team 7
+@version Fall 2018
+*****************************************************************/
 public class Player extends Rectangle{
 	
+	/**Indicates direction the player is moving*/
 	public boolean up, down, left, right;
-	public String direction = "left";
-	/*Speed is how many pixels every tick
-	 * which should be at 180 fps*/
+	/**How many pixels every tick, intitialized to 1*/
 	private int speed = 1;
+	
 	private static int a = 0,b = 0,moveX = 0,moveY = 0;
+	/**Size of the player in pixels*/
 	private int size;
+	/**If the player has won*/
 	boolean winPrint;
 	
-	/**/
+    /*****************************************************************
+    Constructor creates a player
+    @param x x location of player
+    @param y y location of player
+    *****************************************************************/
 	public Player(int x, int y) {
 		size = 20;
 		setBounds(x,y,size,size);//locx,locy,sizex,sizey
 	}
 	
-	/*Allows for movement*/
+   /*****************************************************************
+    Allows for Player movement
+    @return None
+    *****************************************************************/
 	public void move() {
 		winPrint = true;
 		boolean cx = false, cy = false;
@@ -122,7 +136,13 @@ public class Player extends Rectangle{
 		}
 	}
 	
-	/*Checks if the location is okay to go to*/
+	/*****************************************************************
+    Checks if the location is ok to go to
+    @param xDir x direction of entity1
+    @param yDir y direction of entity1
+    @param entity2 the entity that the collision with entity1 is being compared
+    @return boolean
+    *****************************************************************/
 	private boolean collision(int xDir, int yDir, Rectangle entity2) {
 		if ((xDir+size > entity2.getX()) && (xDir < entity2.getX() + entity2.getWidth()) && 
 			(yDir+size > entity2.getY()) &&	(yDir < entity2.getY() + entity2.getHeight())) {
@@ -131,7 +151,11 @@ public class Player extends Rectangle{
 		return false;
 	}
 	
-	/*Creates the pac man rectangle on the board*/
+	/*****************************************************************
+    Creates the Pacman rectangle on the board
+    @param g graphics context
+    @return None
+    *****************************************************************/
 	public void render(Graphics g) {
 		if(((Game.timer % 90) > 45) && Game.p1inv == true) {
 			g.setColor(Color.BLACK);
