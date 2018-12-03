@@ -54,7 +54,10 @@ public class Map extends Rectangle{
 	public void Map() {
 	
 	}
-	
+    /*****************************************************************
+    Determines whether the game is over
+    @return boolean
+    *****************************************************************/	
 	public static boolean gameOver() {
 		boolean ret = true;
 		for(int i = 0; i < board.length; i++) {
@@ -67,6 +70,10 @@ public class Map extends Rectangle{
 		return ret;
 	}
 	
+	    /*****************************************************************
+    Resets the board
+    @return None
+    *****************************************************************/
 	public static void reset() {
 		int[][] board1 = {
 				{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -119,10 +126,10 @@ public class Map extends Rectangle{
 	
    /*****************************************************************
     Changes the board value for a given position of the board
-    @param w - y value of a position on the board
-    @param h - x value of a position on the board
-    @param type - value that the given value should be changed to
-    @return none
+    @param w y value of a position on the board
+    @param h x value of a position on the board
+    @param type value that the given value should be changed to
+    @return None
     *****************************************************************/
 	public static void changeBoardValue(int w, int h,int type){
 		int[][] b = getBoard(); 
@@ -131,7 +138,7 @@ public class Map extends Rectangle{
 	
     /*****************************************************************
     Returns the positions of the walls within a map
-    @param type - entity being searched for within the map (walls)
+    @param type entity being searched for within the map (walls)
     @return ArrayList<Rectangle>
     *****************************************************************/
 	public static ArrayList<Rectangle> getMap(int type) {
@@ -153,8 +160,8 @@ public class Map extends Rectangle{
 	
     /*****************************************************************
     Draws the values for the score and reports if the game is over
-    @param g - graphics context for the panel
-    @return none
+    @param g graphics context for the panel
+    @return None
     *****************************************************************/
 	public void render(Graphics g) {
 		int[][] board = getBoard();
@@ -263,10 +270,10 @@ public class Map extends Rectangle{
 	
     /*****************************************************************
     Draws a character within the game window
-    @param g - graphics context for the panel
-    @param x - x location where the character will be drawn within the window
-    @param c - character to be drawn
-    @return none
+    @param g graphics context for the panel
+    @param x x location where the character will be drawn within the window
+    @param c character to be drawn
+    @return None
     *****************************************************************/
 	private void drawChar(Graphics g, int x, char c){
 		if(c == 'v') {
@@ -346,10 +353,10 @@ public class Map extends Rectangle{
 	
     /*****************************************************************
     Draws a number within the game window
-    @param g - graphics context for the panel
-    @param x - x location where the character will be drawn within the window
-    @param num - number to be drawn
-    @return none
+    @param g graphics context for the panel
+    @param x x location where the character will be drawn within the window
+    @param num number to be drawn
+    @return None
     *****************************************************************/
 	private void drawNumber(Graphics g, int x, int num) {
 		drawEight(g,x);
@@ -366,9 +373,9 @@ public class Map extends Rectangle{
 	
     /*****************************************************************
     Draws a zero within the game window
-    @param g - graphics context for the panel
-    @param x - x location where the character will be drawn within the window
-    @return none
+    @param g graphics context for the panel
+    @param x x location where the character will be drawn within the window
+    @return None
     *****************************************************************/
 	private void drawZero(Graphics g,int x) {
 		g.setColor(Color.BLACK);
@@ -380,9 +387,9 @@ public class Map extends Rectangle{
 	
     /*****************************************************************
     Draws a one within the game window
-    @param g - graphics context for the panel
-    @param x - x location where the character will be drawn within the window
-    @return none
+    @param g graphics context for the panel
+    @param x x location where the character will be drawn within the window
+    @return None
     *****************************************************************/
 	private void drawOne(Graphics g, int x) {
 		g.setColor(Color.BLACK);
@@ -393,9 +400,9 @@ public class Map extends Rectangle{
 	
     /*****************************************************************
     Draws a two within the game window
-    @param g - graphics context for the panel
-    @param x - x location where the character will be drawn within the window
-    @return none
+    @param g graphics context for the panel
+    @param x x location where the character will be drawn within the window
+    @return None
     *****************************************************************/
 	private void drawTwo(Graphics g,int x) {
 		g.setColor(Color.BLACK);
@@ -405,9 +412,9 @@ public class Map extends Rectangle{
 	
     /*****************************************************************
     Draws a three within the game window
-    @param g - graphics context for the panel
-    @param x - x location where the character will be drawn within the window
-    @return none
+    @param g graphics context for the panel
+    @param x x location where the character will be drawn within the window
+    @return None
     *****************************************************************/
 	private void drawThree(Graphics g, int x) {
 		g.setColor(Color.BLACK);
@@ -417,9 +424,9 @@ public class Map extends Rectangle{
 	
     /*****************************************************************
     Draws a four within the game window
-    @param g - graphics context for the panel
-    @param x - x location where the character will be drawn within the window
-    @return none
+    @param g graphics context for the panel
+    @param x x location where the character will be drawn within the window
+    @return None
     *****************************************************************/
 	private void drawFour(Graphics g, int x) {
 		g.setColor(Color.BLACK);
@@ -430,9 +437,9 @@ public class Map extends Rectangle{
 	
     /*****************************************************************
     Draws a five within the game window
-    @param g - graphics context for the panel
-    @param x - x location where the character will be drawn within the window
-    @return none
+    @param g graphics context for the panel
+    @param x x location where the character will be drawn within the window
+    @return None
     *****************************************************************/
 	private void drawFive(Graphics g, int x) {
 		g.setColor(Color.BLACK);
@@ -442,9 +449,9 @@ public class Map extends Rectangle{
 	
     /*****************************************************************
     Draws a six within the game window
-    @param g - graphics context for the panel
-    @param x - x location where the character will be drawn within the window
-    @return none
+    @param g graphics context for the panel
+    @param x x location where the character will be drawn within the window
+    @return None
     *****************************************************************/
 	private void drawSix(Graphics g, int x) {
 		g.setColor(Color.BLACK);
@@ -453,9 +460,9 @@ public class Map extends Rectangle{
 	
     /*****************************************************************
     Draws a eight within the game window
-    @param g - graphics context for the panel
-    @param x - x location where the character will be drawn within the window
-    @return none
+    @param g graphics context for the panel
+    @param x x location where the character will be drawn within the window
+    @return None
     *****************************************************************/
 	private void drawEight(Graphics g, int x) {
 		/*Prints an 8, and gets modified to the char below*/
@@ -473,9 +480,9 @@ public class Map extends Rectangle{
 	
     /*****************************************************************
     Draws a seven within the game window
-    @param g - graphics context for the panel
-    @param x - x location where the character will be drawn within the window
-    @return none
+    @param g graphics context for the panel
+    @param x x location where the character will be drawn within the window
+    @return None
     *****************************************************************/
 	private void drawSeven(Graphics g, int x) {
 		g.setColor(Color.BLACK);
@@ -489,9 +496,9 @@ public class Map extends Rectangle{
 	
     /*****************************************************************
     Draws a nine within the game window
-    @param g - graphics context for the panel
-    @param x - x location where the character will be drawn within the window
-    @return none
+    @param g graphics context for the panel
+    @param x x location where the character will be drawn within the window
+    @return None
     *****************************************************************/
 	private void drawNine(Graphics g, int x) {
 		g.setColor(Color.BLACK);
@@ -500,10 +507,10 @@ public class Map extends Rectangle{
 	
     /*****************************************************************
     Draws a cube within the game window
-    @param g - graphics context for the panel
-    @param i - x location where the character will be drawn within the window
-    @param j - y location where the character will be drawn within the window
-    @return none
+    @param g graphics context for the panel
+    @param i x location where the character will be drawn within the window
+    @param j y location where the character will be drawn within the window
+    @return None
     *****************************************************************/
 	private void drawCube(Graphics g,int i, int j) {
 		Color blueOne = new Color(0,0,255); 
@@ -540,8 +547,8 @@ public class Map extends Rectangle{
 
    /*****************************************************************
     Returns the type of entity of a specified location on the board
-    @param x - x location on the board
-    @param y - y location on the board
+    @param x x location on the board
+    @param y y location on the board
     @return int
     *****************************************************************/	
 	public int getType(int x, int y){
