@@ -2,7 +2,11 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.*;
-
+/*****************************************************************
+Help class contains frame for help information on Main Menu
+@author Team 7
+@version Fall 2018
+*****************************************************************/
 public class help extends JFrame{
 	FlowLayout layout;
 	public help() {
