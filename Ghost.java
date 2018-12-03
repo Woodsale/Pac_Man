@@ -6,10 +6,6 @@ public class Ghost extends Rectangle{
 	/*Speed is how many pixels every tick
 	 * whcih should be at 180 fps*/
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private int speed = 1;
 	private int a = 0; /*Total seconds*/
 	private int b = 0; /*Frames in that second*/
@@ -17,7 +13,10 @@ public class Ghost extends Rectangle{
 	private int moveX = 0,moveY = 0, ghost = 0;
 	private int size;
 	Random ran = new Random();
-	static int asdf; 
+	static int asdf;
+	
+	int locx;
+	int locy;
 	
 	/**/
 	public Ghost(int x, int y,int ghost) {
@@ -37,16 +36,21 @@ public class Ghost extends Rectangle{
 	
 	/*Allows for movement*/
 	public void move() {
+		boolean cx = false, cy = false;
 		Rectangle r = new Rectangle();
 		r.setBounds(40,40,20,20);
 		ArrayList<Rectangle> list = new ArrayList<Rectangle>();
 		list = Map.getMap(0);
 		
+		Rectangle gh = new Rectangle();
+		ArrayList<Rectangle> ghostHouse = new ArrayList<Rectangle>();
+		ghostHouse = Map.getMap(5);
+		
 		/*used for calc movement*/
 		a++;
 		b++;
 		c++;
-		if(c < 180 * 5) {
+		if(c < 180 * 2) {
 			moveY = 0;//Goes up for the first 3 seconds
 			if((a/180)%2==0) {
 				moveX=1;
@@ -55,12 +59,46 @@ public class Ghost extends Rectangle{
 			}
 		}
 		else if(b > 180) {
-			moveX = ran.nextInt(2);
-			moveY = ran.nextInt(2);
+			if(getGhost() == 1) {
+				if(Game.playerLoc(1,0)>this.getX()) {
+					moveX=0;
+				}else{
+					moveX=1;
+				}
+				if(Game.playerLoc(1,1)>this.getY()){
+					moveY=1;
+				}else {
+					moveY=0;
+				}
+			}else if(getGhost() == 2 && c%2==0) {
+				if(Game.playerLoc(3,0)>this.getX()) {
+					moveX=0;
+				}else{
+					moveX=1;
+				}
+				if(Game.playerLoc(3,1)>this.getY()){
+					moveY=1;
+				}else {
+					moveY=0;
+				}
+			}else if(getGhost() == 4 && c%3==0) {
+				if(Game.playerLoc(1,0)>this.getX()) {
+					moveX=1;
+				}else{
+					moveX=0;
+				}
+				if(Game.playerLoc(1,1)>this.getY()){
+					moveY=0;
+				}else {
+					moveY=1;
+				}
+			}else{
+				moveX = ran.nextInt(2);
+				moveY = ran.nextInt(2);
+			}
 			b = 0;
 		}
 		
-		boolean cx = false, cy = false;
 		if(moveX==0) {//moveX=0
 			for(int i = 0;i<list.size();i++) {
 				r = list.get(i);
@@ -99,6 +137,12 @@ public class Ghost extends Rectangle{
 				r = list.get(i);
 				if(collision(x,y+speed,r) == true){
 					cy = true;
+				}
+			}
+			for(int i = 0;i<ghostHouse.size();i++) {
+				gh = ghostHouse.get(i);
+				if(collision(x,y+speed,gh) == true){
+					y-=speed;
 				}
 			}
 			if(cy == false){
