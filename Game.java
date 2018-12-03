@@ -72,7 +72,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	/** Player 1 lives remaining, initialized to 3*/
 	public static int p1LivesRemaining = 3;
 	
-	/**Represents if Player 1 has a life left, initialized to 1 */
+	/** */
 	public static int p1NextLife = 1;
 	
 	/** Player 1 current score, intialized to 0*/
@@ -86,6 +86,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	
     /*****************************************************************
     Constructor starts a new game, intializes players, ghosts, and draws the game board
+    @param size the length of each side in pixels
     *****************************************************************/
 	public Game() {
 		
@@ -215,7 +216,6 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	
     /*****************************************************************
     Moves the player and the Ghosts on the board
-    @return none
     *****************************************************************/
 	private void move() {
 		player.move();
@@ -232,7 +232,6 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	
     /*****************************************************************
     Renders the board, player, and ghosts
-    @return none
     *****************************************************************/
 	private void render() {
 		BufferStrategy bs = getBufferStrategy();
@@ -258,7 +257,6 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	
     /*****************************************************************
     Runs the game at a steady pace
-    @return none
     *****************************************************************/
 	public void run() {
 		requestFocus();//allows movement without clicking
@@ -326,12 +324,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 			playerTwo.direction = "down";
 		}
 	}
-	
-   /*****************************************************************
-    Manages when the player releases a directional key, and translates them to the GUI movement
-    @param e - KeyEvent
-    @return none
-    *****************************************************************/
+
 	@Override
 	public void keyReleased(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
