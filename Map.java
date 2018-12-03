@@ -2,18 +2,17 @@
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
-/*****************************************************************
-Map class contains graphical representation of the walls, pellets, and entities within the game board
 
-@author Team 7
-@version Fall 2018
-*****************************************************************/
 public class Map extends Rectangle{
-	
-	/** The board represented by an array*/
-	/** 0 = Wall, 1 = Pellet, 2 = Text tile, 3 = no pellet tile, 4 = PM Lives tile, 5 = Ghost House */
 	public static int[][] board = {
-			
+			/**
+			 * 0 = Wall
+			 * 1 = pellot tile
+			 * 2 = text tile
+			 * 3 = no pellet tile
+			 * 4 = PM Live tile
+			 * 5 = Ghost House
+			 * */
 			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 			{0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,4,4,4,0},
 			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -47,39 +46,19 @@ public class Map extends Rectangle{
 			{0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0},
 			{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
 	};
-	
-    /*****************************************************************
-    Default constructor creates map, may include input of what level
-    *****************************************************************/
 	public void Map() {
-	
+	/*Might include input for what map level*/
 	}
 	
-    /*****************************************************************
-    Returns current board
-    @return int[][]
-    *****************************************************************/
 	public static int[][] getBoard() {
 		return board; 
 	}
 	
-   /*****************************************************************
-    Changes the board value for a given position of the board
-    @param w - y value of a position on the board
-    @param h - x value of a position on the board
-    @param type - value that the given value should be changed to
-    @return none
-    *****************************************************************/
 	public static void changeBoardValue(int w, int h,int type){
 		int[][] b = getBoard(); 
 		b[h][w] = type;
 	}
 	
-    /*****************************************************************
-    Returns the positions of the walls within a map
-    @param type - entity being searched for within the map (walls)
-    @return ArrayList<Rectangle>
-    *****************************************************************/
 	public static ArrayList<Rectangle> getMap(int type) {
 		int[][] board = getBoard();
 		ArrayList<Rectangle> ghost = new ArrayList<Rectangle>();
@@ -97,11 +76,6 @@ public class Map extends Rectangle{
 		return ghost;
 	}	
 	
-    /*****************************************************************
-    Draws the values for the score and reports if the game is over
-    @param g - graphics context for the panel
-    @return none
-    *****************************************************************/
 	public void render(Graphics g) {
 		int[][] board = getBoard();
 		for(int i=0;(i*20)<(board[0].length*20);i++) {
