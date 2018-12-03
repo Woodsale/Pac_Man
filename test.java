@@ -3,30 +3,16 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
-/*****************************************************************
-Contains JUnit Tests for the game 
-@author Team 7
-@version Fall 2018
-*****************************************************************/
 class test {
 
 	@Before
     public void setUp() throws Exception {
          Game game = new Game();
     }
-/*****************************************************************
-Checks pause status 
-@should return True
-*****************************************************************/
 	@Test
 	void checkPausedStatus() {
 		assertFalse(Game.isPaused);
 	}
-	
-/*****************************************************************
-Checks initial map 
-@should return True 
-*****************************************************************/
 	@Test
 	void checkInitialMap() {
 		boolean ret = true;
@@ -88,29 +74,14 @@ Checks initial map
 		assertTrue(ret1);
 		assertTrue(ret2);
 	}
-	
-/*****************************************************************
-Checks inital lives remaining
-@should return True 
-*****************************************************************/
 	@Test
 	void lives() {
 		assertEquals(Game.p1LivesRemaining, 3);
 	}
-	
-/*****************************************************************
-Checks initial Player 1 score 
-@should return True 
-*****************************************************************/
 	@Test
 	void startingScore() {
 		assertEquals(Game.playerOneScore, 0);
 	}
-	
-/*****************************************************************
-Checks initial 'Game Over' value
-@should return True 
-*****************************************************************/
 	@Test
 	void gameOver() {
 		assertFalse(Game.map.gameOver());
