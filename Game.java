@@ -214,9 +214,6 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		return 0;
 	}
 	
-    /*****************************************************************
-    Moves the player and the Ghosts on the board
-    *****************************************************************/
 	private void move() {
 		player.move();
 		playerTwo.move();	
@@ -230,9 +227,6 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		timer++;
 	}
 	
-    /*****************************************************************
-    Renders the board, player, and ghosts
-    *****************************************************************/
 	private void render() {
 		BufferStrategy bs = getBufferStrategy();
 		if(bs == null) {
@@ -255,9 +249,9 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		bs.show();
 	}
 	
-    /*****************************************************************
-    Runs the game at a steady pace
-    *****************************************************************/
+	/*The parts of this that were 	
+	 * found on stackOverflow		
+	 * are used to keep the program at 60fps*/
 	public void run() {
 		requestFocus();//allows movement without clicking
 		int fps = 0;//current time
