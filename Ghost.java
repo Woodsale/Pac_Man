@@ -2,56 +2,24 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-/*****************************************************************
-Ghost class is made up of rectangles which represent ghost entities in the Pacman game
-
-@author Team 7
-@version Fall 2018
-*****************************************************************/
 public class Ghost extends Rectangle{
+	/*Speed is how many pixels every tick
+	 * whcih should be at 180 fps*/
 	
-	/** pixels per tick, initialized to 1 */
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int speed = 1;
-	
-	/**Total seconds*/
-	private int a = 0; 
-	
-	/**Frames in that second*/
-	private int b = 0; 
-	
-	/**First few seconds*/
-	private int c = 0; 
-	
-	/**movement in the X direction*/
-	private int moveX = 0
-	
-	/**movement in the y direction*/
-	private int moveY = 0
-	
-	/*represtents ghost's color/type*/
-	private int ghost = 0;
-	
-	/**size of the ghost in pixels*/
+	private int a = 0; /*Total seconds*/
+	private int b = 0; /*Frames in that second*/
+	private int c = 0; /*First few seconds*/
+	private int moveX = 0,moveY = 0, ghost = 0;
 	private int size;
-	
-	/**random value*/
 	Random ran = new Random();
+	static int asdf; 
 	
-	
-	static int asdf;
-	
-	/**x location*/
-	int locx;
-	
-	/**y location*/
-	int locy;
-	
-    /*****************************************************************
-    Constructor creates a ghost
-    @param x - x location
-    @param y - y location
-    @param ghost
-    *****************************************************************/
+	/**/
 	public Ghost(int x, int y,int ghost) {
 		size = 20;
 		setBounds(x,y,size,size);//locx,locy,sizex,sizey
@@ -59,43 +27,26 @@ public class Ghost extends Rectangle{
 		setGhost(ghost);
 	}
 	
-    /*****************************************************************
-    Set the ghost.
-    @param g - ghost
-    @return none
-    *****************************************************************/
 	void setGhost(int g) {
 		ghost = g;
 	}
 	
-    /*****************************************************************
-    Returns the value associated with a ghost.
-    @return int
-    *****************************************************************/
 	int getGhost() {
 		return ghost;
 	}
 	
-    /*****************************************************************
-    Allows for and calculates ghost movement based on ghost color/type
-    @return none
-    *****************************************************************/
+	/*Allows for movement*/
 	public void move() {
-		boolean cx = false, cy = false;
 		Rectangle r = new Rectangle();
 		r.setBounds(40,40,20,20);
 		ArrayList<Rectangle> list = new ArrayList<Rectangle>();
 		list = Map.getMap(0);
 		
-		Rectangle gh = new Rectangle();
-		ArrayList<Rectangle> ghostHouse = new ArrayList<Rectangle>();
-		ghostHouse = Map.getMap(5);
-		
 		/*used for calc movement*/
 		a++;
 		b++;
 		c++;
-		if(c < 180 * 2) {
+		if(c < 180 * 5) {
 			moveY = 0;//Goes up for the first 3 seconds
 			if((a/180)%2==0) {
 				moveX=1;
@@ -104,46 +55,12 @@ public class Ghost extends Rectangle{
 			}
 		}
 		else if(b > 180) {
-			if(getGhost() == 1) {
-				if(Game.playerLoc(1,0)>this.getX()) {
-					moveX=0;
-				}else{
-					moveX=1;
-				}
-				if(Game.playerLoc(1,1)>this.getY()){
-					moveY=1;
-				}else {
-					moveY=0;
-				}
-			}else if(getGhost() == 2 && c%2==0) {
-				if(Game.playerLoc(3,0)>this.getX()) {
-					moveX=0;
-				}else{
-					moveX=1;
-				}
-				if(Game.playerLoc(3,1)>this.getY()){
-					moveY=1;
-				}else {
-					moveY=0;
-				}
-			}else if(getGhost() == 4 && c%3==0) {
-				if(Game.playerLoc(1,0)>this.getX()) {
-					moveX=1;
-				}else{
-					moveX=0;
-				}
-				if(Game.playerLoc(1,1)>this.getY()){
-					moveY=0;
-				}else {
-					moveY=1;
-				}
-			}else{
-				moveX = ran.nextInt(2);
-				moveY = ran.nextInt(2);
-			}
+			moveX = ran.nextInt(2);
+			moveY = ran.nextInt(2);
 			b = 0;
 		}
 		
+		boolean cx = false, cy = false;
 		if(moveX==0) {//moveX=0
 			for(int i = 0;i<list.size();i++) {
 				r = list.get(i);
@@ -184,25 +101,13 @@ public class Ghost extends Rectangle{
 					cy = true;
 				}
 			}
-			for(int i = 0;i<ghostHouse.size();i++) {
-				gh = ghostHouse.get(i);
-				if(collision(x,y+speed,gh) == true){
-					y-=speed;
-				}
-			}
 			if(cy == false){
 				y+=speed;
 			}
 		}
 	}
 	
-    /*****************************************************************
-    Checks if location is ok to move to 
-    @param xDir - x direction of entity1
-    @param yDir - y direction of entity1
-    @param entity2 - object that is possibly colliding with entity1
-    @return boolean
-    *****************************************************************/
+	/*Checks if the location is okay to go to*/
 	private boolean collision(int xDir, int yDir, Rectangle entity2) {
 		if ((xDir+size > entity2.getX()) && (xDir < entity2.getX() + entity2.getWidth()) && 
 			(yDir+size > entity2.getY()) &&	(yDir < entity2.getY() + entity2.getHeight())) {
@@ -211,12 +116,7 @@ public class Ghost extends Rectangle{
 		return false;
 	}
 	
-	
-   /*****************************************************************
-    Creates ghost rectangle on the board
-    @param g - graphics context
-    @return none
-    *****************************************************************/
+	/*Creates the pac man rectangle on the board*/
 	public void render(Graphics g) {
 		if(getGhost() == 1) {
 			g.setColor(Color.red);
