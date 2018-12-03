@@ -22,35 +22,50 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	/** Game Thread */
 	private Thread thread;
 	
-	/*Entity Objects*/
+	/**Player Object*/
 	public static Player player;
+	/**Player Object*/
 	public static Player playerTwo;
+	/**Player Object*/
 	public static Player one;
+	/**Player Object*/
 	public static Player two;
+	/**Red ghost*/
 	public static Ghost blinky;
+	/**Pink ghost*/
 	public static Ghost pinky;
+	/**Blue ghost*/
 	public static Ghost inky;
+	/**Orange ghost*/
 	public static Ghost clyde;
-	/*Map Object*/
+	/**Map Object*/
 	public static Map map;
 	
-	/*Timer for timing everything*/
+	/**Timer for timing everything, initialized to 0*/
 	public static int timer = 0;
 	
-	/*Used in a player death*/
+	/**Time player is invincible after death, initialized to 3*/
 	public static int invTime = 3;
-	public static int p1InvTimer = 0;//used in calc inv time
-	public static boolean p1inv = false;//used for player death
+	/**Used to calculate invincible time*, initialized to 0/
+	public static int p1InvTimer = 0;
+	/**Used for player death, initialized to false*/
+	public static boolean p1inv = false;
+	/**Player 1 lives remaining, initialized to 3*/
 	public static int p1LivesRemaining = 3;
+	/**Player 1 next life, initialized to 1*/
 	public static int p1NextLife = 1;
+	/**Is the game over, initialized to false*/
 	public static boolean gameOver = false;
+	/**Is the game paused, initialized to false*/
 	public static boolean isPaused = false;
 	
-	/*Difficult and level, used for ghost speed*/
+	/**Difficulty, used for ghost speed*/
 	public static int difficulty = 1;//used for calc difficultly
+	/**Level, used for ghost speed*/
 	public static int level = 1;
-	
+	/**Player 1 score, initialized to 0*/
 	public static int playerOneScore = 0;
+	/**Player 2 score, initialized to 0*/
 	public static int playerTwoScore = 0;
 	
 	/*For possible future updates*/
@@ -79,8 +94,8 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	
 	/*****************************************************************
     Retuns the either the x or the y location of the requested entity
-    @param p - entity (player or ghost)
-    @param v - x or y location of the entity
+    @param p entity (player or ghost)
+    @param v x or y location of the entity
     @return int
     *****************************************************************/
 	public static int playerLoc(int p, int v) {
@@ -119,9 +134,9 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	
 	/*****************************************************************
     Sets the location of the Player based whether or not they've lost a life
-    @param lost - entity (player or ghost)
-    @param pm - Player 1 or Player 2
-    @return none
+    @param lost entity (player or ghost)
+    @param pm Player 1 or Player 2
+    @return None
     *****************************************************************/
 	public static void lifeCounter(boolean lost, int pm) {
 		if(lost == true && pm == 1) {
@@ -137,8 +152,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	
 	/*****************************************************************
     Returns a list of ghosts (represented by rectangles)
-    @param none
-    @return ArrayList<Rectangle>
+     @return ArrayList<Rectangle>
     *****************************************************************/
 	public static ArrayList<Rectangle> getGhost() {
 		ArrayList<Rectangle> ghost = new ArrayList<Rectangle>();
@@ -150,8 +164,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	}
 	/*****************************************************************
     Starts the game play
-    @param none
-    @return none
+     @return None
     *****************************************************************/
 	public synchronized void start() {
 		if(isRunning) return;
@@ -161,8 +174,8 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	}
 	/*****************************************************************
     Returns the given player's score
-    @param player - Player 1 or Player 2 
-    @param d
+    @param player Player 1 or Player 2 
+    @param d Digit
     @return int
     *****************************************************************/
 	public static int playerScoreDigit(int player,int d) {
@@ -179,7 +192,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	}
 	/*****************************************************************
     Moves the player and the Ghosts on the board
-    @return none
+    @return None
     *****************************************************************/
 	private void move() {
 		if(gameOver == false && timer > 180*5) {
@@ -197,7 +210,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	}
 	/*****************************************************************
     Renders the board, player, and ghosts
-    @return none
+    @return None
     *****************************************************************/
 	private void render() {
 		BufferStrategy bs = getBufferStrategy();
@@ -223,7 +236,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	
 	/*****************************************************************
     Runs the game at a steady pace
-    @return none
+    @return None
     *****************************************************************/
 	public void run() {
 		requestFocus();//allows movement without clicking
@@ -263,8 +276,8 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	}
 	/*****************************************************************
     Manages the player's keypresses, and translates them to the GUI movement
-    @param e - KeyEvent
-    @return none
+    @param e KeyEvent
+    @return None
     *****************************************************************/
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -282,8 +295,8 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	/*****************************************************************
     Manages when the player releases a directional key, 
     and translates them to the GUI movement
-    @param e - KeyEvent
-    @return none
+    @param e KeyEvent
+    @return None
     *****************************************************************/
 	@Override
 	public void keyReleased(KeyEvent e) {
