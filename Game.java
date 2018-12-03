@@ -1,3 +1,5 @@
+package pacman;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -7,58 +9,87 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 /*****************************************************************
-Game class contains all of the logic and entity (Pacman/Ghost) 
-information needed to play the Pacman game 
+Game class contains all of the logic and entity (Pacman/Ghost) information needed to play the Pacman game 
+
 @author Team 7
 @version Fall 2018
 *****************************************************************/
 public class Game extends Canvas implements Runnable,KeyListener{
-	/** Indicates whether the game is playing */
+	/** indicates whether the game is playing */
 	private boolean isRunning = false;
-	/** Final dimensions for the game board (in pixels) */
-	public static final int WIDTH = 380, HEIGHT = 640;
-	/** Title of the game */
+	
+	/** final dimensions for the game board (in pixels) */
+	public static final int WIDTH = 380, HEIGHT = 640;//480,640 
+	
+	/** title of the game */
 	public static final String TITLE = "Pac Man";  
-	/** Game Thread */
+	
+	/** thread that updates as the game is played */
 	private Thread thread;
 	
-	/*Entity Objects*/
+	/** Object of the player class - Player 1 */
 	public static Player player;
+	
+	/** Object of the player class - Player 2 */
 	public static Player playerTwo;
+	
+	/** Object of the player class - Player 1 */
 	public static Player one;
+	
+	/** Object of the player class - Player 2 */
 	public static Player two;
+	
+	/** Object of the ghost class - Red */
 	public static Ghost blinky;
+	
+	/** Object of the ghost class - Pink */
 	public static Ghost pinky;
+	
+	/** Object of the ghost class - Blue */
 	public static Ghost inky;
+	
+	/** Object of the ghost class - Orange */
 	public static Ghost clyde;
-	/*Map Object*/
+	
+	/** Object of the map class */
 	public static Map map;
 	
-	/*Timer for timing everything*/
+	/** Object of the ghost class - Pink */
 	public static int timer = 0;
 	
-	/*Used in a player death*/
+	/** Invincible timer*/
 	public static int invTime = 3;
-	public static int p1InvTimer = 0;//used in calc inv time
-	public static boolean p1inv = false;//used for player death
-	public static int p1LivesRemaining = 3;
-	public static int p1NextLife = 1;
-	public static boolean gameOver = false;
 	
-	/*Difficult and level, used for ghost speed*/
-	public static int difficulty = 1;//used for calc difficultly
+	/**Player 1 Invincible timer*/
+	public static int p1InvTimer = 0;
+	
+	/**Is Player 1 currently invincible?, initialized to false*/
+	public static boolean p1inv = false;
+	
+	/** Current level, intialized to 1*/
 	public static int level = 1;
 	
+	/** Player 1 lives remaining, initialized to 3*/
+	public static int p1LivesRemaining = 3;
+	
+	/**Represents if Player 1 has a life left, initialized to 1 */
+	public static int p1NextLife = 1;
+	
+	/** Player 1 current score, intialized to 0*/
 	public static int playerOneScore = 0;
+	
+	/** Player 2 current score, intialized to 0*/
 	public static int playerTwoScore = 0;
 	
-	/*For possible future updates*/
+	/** Is this a 2 player game?, initialized to false*/
 	public static boolean twoPlayer = false;
 	
-	/*****************************************************************
+    /*****************************************************************
     Constructor starts a new game, intializes players, ghosts, and draws the game board
     *****************************************************************/
 	public Game() {
+		
+		// initialize display characteristics 
 		Dimension dimension = new Dimension(Game.WIDTH,Game.HEIGHT);
 		setPreferredSize(dimension);
 		setMinimumSize(dimension);
@@ -75,7 +106,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		map = new Map(); 
 	}
 	
-	/*****************************************************************
+    /*****************************************************************
     Retuns the either the x or the y location of the requested entity
     @param p - entity (player or ghost)
     @param v - x or y location of the entity
@@ -106,7 +137,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		return 0;
 	}
 	
-	/*****************************************************************
+    /*****************************************************************
     Sets the location of the Player based whether or not they've lost a life
     @param lost - entity (player or ghost)
     @param pm - Player 1 or Player 2
@@ -124,7 +155,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		}
 	}
 	
-	/*****************************************************************
+    /*****************************************************************
     Returns a list of ghosts (represented by rectangles)
     @param none
     @return ArrayList<Rectangle>
@@ -137,7 +168,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 			ghost.add(clyde);
 		return ghost;
 	}
-	/*****************************************************************
+    /*****************************************************************
     Starts the game play
     @param none
     @return none
@@ -147,12 +178,13 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		isRunning = true;
 		thread = new Thread(this);
 		thread.start();
-	}
-	/*****************************************************************
+		
+    /*****************************************************************
     Stops the game play
     @param none
     @return none
     *****************************************************************/
+	}
 	public synchronized void stop(){
 		if(!isRunning) return;
 		isRunning = false;
@@ -162,7 +194,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 			e.printStackTrace();
 		}
 	}
-	/*****************************************************************
+    /*****************************************************************
     Returns the given player's score
     @param player - Player 1 or Player 2 
     @param d
@@ -180,25 +212,25 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		}
 		return 0;
 	}
-	/*****************************************************************
+	
+    /*****************************************************************
     Moves the player and the Ghosts on the board
     @return none
     *****************************************************************/
 	private void move() {
-		if(gameOver == false && timer > 180*5) {
-			player.move();
-			playerTwo.move();	
-			/*Makes them move slower*/
-			if(timer % (difficulty*5*level) > 1) {
-				blinky.move();
-				pinky.move();
-				inky.move();
-				clyde.move();
-			}
+		player.move();
+		playerTwo.move();	
+		/*Makes them move slower*/
+		if(timer % (10*level) > 1) {
+			blinky.move();
+			pinky.move();
+			inky.move();
+			clyde.move();
 		}
 		timer++;
 	}
-	/*****************************************************************
+	
+    /*****************************************************************
     Renders the board, player, and ghosts
     @return none
     *****************************************************************/
@@ -220,12 +252,11 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		pinky.render(g);
 		inky.render(g);
 		clyde.render(g);
-
 		g.dispose();
 		bs.show();
 	}
 	
-	/*****************************************************************
+    /*****************************************************************
     Runs the game at a steady pace
     @return none
     *****************************************************************/
@@ -254,40 +285,80 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		}
 		stop();
 	}
-	/*****************************************************************
+    /*****************************************************************
     Manages the player's keypresses, and translates them to the GUI movement
     @param e - KeyEvent
     @return none
     *****************************************************************/
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode() == KeyEvent.VK_RIGHT) player.right = true;
-		if(e.getKeyCode() == KeyEvent.VK_LEFT) player.left = true;
-		if(e.getKeyCode() == KeyEvent.VK_UP) player.up = true;
-		if(e.getKeyCode() == KeyEvent.VK_DOWN) player.down = true;
+		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			player.right = true;
+			player.direction = "right";
+		}
+		if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+			player.left = true;
+			player.direction = "left";
+		}
+		if(e.getKeyCode() == KeyEvent.VK_UP) {
+			player.up = true;
+			player.direction = "up";
+		}
+		if(e.getKeyCode() == KeyEvent.VK_DOWN) {
+			player.down = true;
+			player.direction = "down";
+		}
 	
-		if(e.getKeyCode() == KeyEvent.VK_D) playerTwo.right = true;
-		if(e.getKeyCode() == KeyEvent.VK_A) playerTwo.left = true;
-		if(e.getKeyCode() == KeyEvent.VK_W) playerTwo.up = true;
-		if(e.getKeyCode() == KeyEvent.VK_S) playerTwo.down = true;
+		if(e.getKeyCode() == KeyEvent.VK_D) {
+			playerTwo.right = true;
+			playerTwo.direction = "right";
+		}
+		if(e.getKeyCode() == KeyEvent.VK_A) {
+			playerTwo.left = true;
+			playerTwo.direction = "left";
+		}
+		if(e.getKeyCode() == KeyEvent.VK_W) {
+			playerTwo.up = true;
+			playerTwo.direction = "up";
+		}
+		if(e.getKeyCode() == KeyEvent.VK_S) {
+			playerTwo.down = true;
+			playerTwo.direction = "down";
+		}
 	}
-	/*****************************************************************
-    Manages when the player releases a directional key, 
-    and translates them to the GUI movement
+	
+   /*****************************************************************
+    Manages when the player releases a directional key, and translates them to the GUI movement
     @param e - KeyEvent
     @return none
     *****************************************************************/
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if(e.getKeyCode() == KeyEvent.VK_RIGHT) player.right = false;
-		if(e.getKeyCode() == KeyEvent.VK_LEFT) player.left = false;
-		if(e.getKeyCode() == KeyEvent.VK_UP) player.up = false;
-		if(e.getKeyCode() == KeyEvent.VK_DOWN) player.down = false;
+		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			player.right = false;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+			player.left = false;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_UP) {
+			player.up = false;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_DOWN) {
+			player.down = false;
+		}
 		
-		if(e.getKeyCode() == KeyEvent.VK_D) playerTwo.right = false;
-		if(e.getKeyCode() == KeyEvent.VK_A) playerTwo.left = false;
-		if(e.getKeyCode() == KeyEvent.VK_W) playerTwo.up = false;
-		if(e.getKeyCode() == KeyEvent.VK_S) playerTwo.down = false;		
+		if(e.getKeyCode() == KeyEvent.VK_D) {
+			playerTwo.right = false;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_A) {
+			playerTwo.left = false;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_W) {
+			playerTwo.up = false;
+		}
+		if(e.getKeyCode() == KeyEvent.VK_S) {
+			playerTwo.down = false;		
+		}
 	}
 	@Override
 	public void keyTyped(KeyEvent e) {}
