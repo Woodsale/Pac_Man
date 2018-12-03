@@ -207,13 +207,6 @@ public class Map extends Rectangle{
 		}
 	}
 	
-    /*****************************************************************
-    Draws a character within the game window
-    @param g - graphics context for the panel
-    @param x - x location where the character will be drawn within the window
-    @param c - character to be drawn
-    @return none
-    *****************************************************************/
 	private void drawChar(Graphics g, int x, char c){
 		if(c == 'v') {
 			g.setColor(Color.YELLOW);	
@@ -290,13 +283,6 @@ public class Map extends Rectangle{
 		}
 	}
 	
-    /*****************************************************************
-    Draws a number within the game window
-    @param g - graphics context for the panel
-    @param x - x location where the character will be drawn within the window
-    @param num - number to be drawn
-    @return none
-    *****************************************************************/
 	private void drawNumber(Graphics g, int x, int num) {
 		drawEight(g,x);
 		if(num == 0) {drawZero(g,x);}
@@ -310,12 +296,6 @@ public class Map extends Rectangle{
 		else if(num == 9) {drawNine(g,x);}
 	}
 	
-    /*****************************************************************
-    Draws a zero within the game window
-    @param g - graphics context for the panel
-    @param x - x location where the character will be drawn within the window
-    @return none
-    *****************************************************************/
 	private void drawZero(Graphics g,int x) {
 		g.setColor(Color.BLACK);
 		g.fillRect((3+x*20), (6+20), 14, 8);
@@ -324,12 +304,6 @@ public class Map extends Rectangle{
 		g.fillRect((17+x*20), (9+20), 2, 2);
 	}
 	
-    /*****************************************************************
-    Draws a one within the game window
-    @param g - graphics context for the panel
-    @param x - x location where the character will be drawn within the window
-    @return none
-    *****************************************************************/
 	private void drawOne(Graphics g, int x) {
 		g.setColor(Color.BLACK);
 		g.fillRect((3+x*20), (20), 20, 20);
@@ -337,36 +311,18 @@ public class Map extends Rectangle{
 		g.fillRect((1+x*20), (9+20), 2, 2);
 	}
 	
-    /*****************************************************************
-    Draws a two within the game window
-    @param g - graphics context for the panel
-    @param x - x location where the character will be drawn within the window
-    @return none
-    *****************************************************************/
 	private void drawTwo(Graphics g,int x) {
 		g.setColor(Color.BLACK);
 		g.fillRect((1+x*20), (4+20), 2, 5);
 		g.fillRect((17+x*20), (11+20), 2, 5);
 	}
 	
-    /*****************************************************************
-    Draws a three within the game window
-    @param g - graphics context for the panel
-    @param x - x location where the character will be drawn within the window
-    @return none
-    *****************************************************************/
 	private void drawThree(Graphics g, int x) {
 		g.setColor(Color.BLACK);
 		g.fillRect((1+x*20), (4+20), 2, 5);
 		g.fillRect((1+x*20), (11+20), 2, 5);
 	}
 	
-    /*****************************************************************
-    Draws a four within the game window
-    @param g - graphics context for the panel
-    @param x - x location where the character will be drawn within the window
-    @return none
-    *****************************************************************/
 	private void drawFour(Graphics g, int x) {
 		g.setColor(Color.BLACK);
 		g.fillRect((1+x*20), (11+20), 2, 5);
@@ -374,35 +330,17 @@ public class Map extends Rectangle{
 		g.fillRect((3+x*20), (16+20), 14, 2);
 	} 
 	
-    /*****************************************************************
-    Draws a five within the game window
-    @param g - graphics context for the panel
-    @param x - x location where the character will be drawn within the window
-    @return none
-    *****************************************************************/
 	private void drawFive(Graphics g, int x) {
 		g.setColor(Color.BLACK);
 		g.fillRect((17+x*20), (4+20), 2, 5);
 		g.fillRect((1+x*20), (11+20), 2, 5);
 	}
 	
-    /*****************************************************************
-    Draws a six within the game window
-    @param g - graphics context for the panel
-    @param x - x location where the character will be drawn within the window
-    @return none
-    *****************************************************************/
 	private void drawSix(Graphics g, int x) {
 		g.setColor(Color.BLACK);
 		g.fillRect((17+x*20), (4+20), 2, 5);
 	}
 	
-    /*****************************************************************
-    Draws a eight within the game window
-    @param g - graphics context for the panel
-    @param x - x location where the character will be drawn within the window
-    @return none
-    *****************************************************************/
 	private void drawEight(Graphics g, int x) {
 		/*Prints an 8, and gets modified to the char below*/
 		g.setColor(Color.YELLOW);
@@ -417,12 +355,6 @@ public class Map extends Rectangle{
 		g.fillRect((17+x*20), (11+20), 2, 5);
 	}
 	
-    /*****************************************************************
-    Draws a seven within the game window
-    @param g - graphics context for the panel
-    @param x - x location where the character will be drawn within the window
-    @return none
-    *****************************************************************/
 	private void drawSeven(Graphics g, int x) {
 		g.setColor(Color.BLACK);
 		/*Bars*/
@@ -433,24 +365,11 @@ public class Map extends Rectangle{
 		g.fillRect((1+x*20), (11+20), 2, 5);
 	}
 	
-    /*****************************************************************
-    Draws a nine within the game window
-    @param g - graphics context for the panel
-    @param x - x location where the character will be drawn within the window
-    @return none
-    *****************************************************************/
 	private void drawNine(Graphics g, int x) {
 		g.setColor(Color.BLACK);
 		g.fillRect((1+x*20), (11+20), 2, 5);
 	}
 	
-    /*****************************************************************
-    Draws a cube within the game window
-    @param g - graphics context for the panel
-    @param i - x location where the character will be drawn within the window
-    @param j - y location where the character will be drawn within the window
-    @return none
-    *****************************************************************/
 	private void drawCube(Graphics g,int i, int j) {
 		Color blueOne = new Color(0,0,255); 
 		Color blueTwo = new Color(0,100,164); 
@@ -484,12 +403,7 @@ public class Map extends Rectangle{
 		g.fillRect((5+i*20), (5+j*20), 10, 10);
 	}
 
-   /*****************************************************************
-    Returns the type of entity of a specified location on the board
-    @param x - x location on the board
-    @param y - y location on the board
-    @return int
-    *****************************************************************/	
+	/*Checks if its a pellot or a wall*/
 	public int getType(int x, int y){
 		int[][] board = getBoard();
 		return board[x][y];
