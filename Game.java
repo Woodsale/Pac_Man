@@ -50,16 +50,22 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	public static int p1InvTimer = 0;
 	/**used for player death*/
 	public static boolean p1inv = false;
+	/**lives remaining*/
 	public static int p1LivesRemaining = 3;
+	/**next life*/
 	public static int p1NextLife = 1;
+	/**is the game over*/
 	public static boolean gameOver = false;
+	/**is the game paused*/
 	public static boolean isPaused = false;
 	
-	/*Difficult and level, used for ghost speed*/
-	public static int difficulty = 1;//used for calc difficultly
+	/**Difficulty, used for ghost speed*/
+	public static int difficulty = 1;
+	/**Level, used for ghost speed*/
 	public static int level = 1;
-	
+	/**player 1 score*/
 	public static int playerOneScore = 0;
+	/**player 1 score*/
 	public static int playerTwoScore = 0;
 	
 	/*For possible future updates*/
