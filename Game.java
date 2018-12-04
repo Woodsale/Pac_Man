@@ -22,25 +22,34 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	/** Game Thread */
 	private Thread thread;
 	
-	/*Entity Objects*/
+	/**Player Object*/
 	public static Player player;
+	/**Player Object*/
 	public static Player playerTwo;
+	/**Player Object*/
 	public static Player one;
+	/**Player Object*/
 	public static Player two;
+	/**Ghost Object*/
 	public static Ghost blinky;
+	/**Ghost Object*/
 	public static Ghost pinky;
+	/**Ghost Object*/
 	public static Ghost inky;
+	/**Ghost Object*/
 	public static Ghost clyde;
-	/*Map Object*/
+	/**Map Object*/
 	public static Map map;
 	
-	/*Timer for timing everything*/
+	/**Timer for timing everything*/
 	public static int timer = 0;
 	
-	/*Used in a player death*/
+	/**Used in a player death*/
 	public static int invTime = 3;
-	public static int p1InvTimer = 0;//used in calc inv time
-	public static boolean p1inv = false;//used for player death
+	/**used in calc inv time*/
+	public static int p1InvTimer = 0;
+	/**used for player death*/
+	public static boolean p1inv = false;
 	public static int p1LivesRemaining = 3;
 	public static int p1NextLife = 1;
 	public static boolean gameOver = false;
