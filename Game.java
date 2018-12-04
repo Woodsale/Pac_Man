@@ -44,6 +44,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 	public static int p1LivesRemaining = 3;
 	public static int p1NextLife = 1;
 	public static boolean gameOver = false;
+	public static boolean isPaused = false;
 	
 	/*Difficult and level, used for ghost speed*/
 	public static int difficulty = 1;//used for calc difficultly
@@ -59,6 +60,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
     Constructor starts a new game, intializes players, ghosts, and draws the game board
     *****************************************************************/
 	public Game() {
+		Sound.INTRO.play();
 		Dimension dimension = new Dimension(Game.WIDTH,Game.HEIGHT);
 		setPreferredSize(dimension);
 		setMinimumSize(dimension);
@@ -106,6 +108,15 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		return 0;
 	}
 	
+	public void pause() {
+		if(isPaused) {
+			isPaused = false;
+		}
+		else {
+			isPaused = true;
+		}
+	}
+	
 	/*****************************************************************
     Sets the location of the Player based whether or not they've lost a life
     @param lost - entity (player or ghost)
@@ -147,20 +158,6 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		isRunning = true;
 		thread = new Thread(this);
 		thread.start();
-	}
-	/*****************************************************************
-    Stops the game play
-    @param none
-    @return none
-    *****************************************************************/
-	public synchronized void stop(){
-		if(!isRunning) return;
-		isRunning = false;
-		try{
-			thread.join();
-		}catch(InterruptedException e) {
-			e.printStackTrace();
-		}
 	}
 	/*****************************************************************
     Returns the given player's score
@@ -220,7 +217,6 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		pinky.render(g);
 		inky.render(g);
 		clyde.render(g);
-
 		g.dispose();
 		bs.show();
 	}
@@ -241,18 +237,29 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		while(isRunning==true) {
 			//checks current time
 			long now = System.nanoTime();
-			
 			x+=(now - lastTime)/nanosec;
 			lastTime = now;
 			//System.out.println("X is: "+x);
 			while(x>=1) {
-				move();
+				if(!isPaused)
+					move();
 				render();
 				fps++;
 				x--;
 			}
+			if(Map.gameOver()) {
+				//goto next level
+				Map.reset();
+				level++;
+				player.setLocation(9*20, 19*20);
+				blinky.setLocation(10*20,16*20);
+				pinky.setLocation(10*20,17*20);
+				clyde.setLocation(9*20,16*20);
+			}
+			if(p1LivesRemaining < 1) {
+				gameOver = true;
+			}
 		}
-		stop();
 	}
 	/*****************************************************************
     Manages the player's keypresses, and translates them to the GUI movement
@@ -270,6 +277,7 @@ public class Game extends Canvas implements Runnable,KeyListener{
 		if(e.getKeyCode() == KeyEvent.VK_A) playerTwo.left = true;
 		if(e.getKeyCode() == KeyEvent.VK_W) playerTwo.up = true;
 		if(e.getKeyCode() == KeyEvent.VK_S) playerTwo.down = true;
+		if(e.getKeyCode() == KeyEvent.VK_P) pause();
 	}
 	/*****************************************************************
     Manages when the player releases a directional key, 
