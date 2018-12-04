@@ -1,29 +1,36 @@
 
-/**
- * Write a description of class Image here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
+/**
+ * Main menu.
+ *
+ * @author Team 7
+ * @version Fall 2018
+ */
 public class mainMenu extends JFrame implements ActionListener
 {
+    /** Buttons for the game */
     private JButton startGame, Exit;
-
+    /** Menu for the game */
     private JMenuBar menu;
+    /** Options for the game */
     private JMenu options;
+    /** Option items for the game */
     private JMenuItem quit, help; 
-
+    /** Difficulty label */
     private JLabel difficulty;
+    /** Difficulty checkboxes*/
     private JCheckBox easy, medium, hard;
-    
+    /** Difficulty buttongroup*/
     private ButtonGroup difficultyChoice;
-    
+    /** Game object */
     private Game game;
 
+    /*****************************************************************
+    Constructor of a main menu 
+    @return none
+    *****************************************************************/
     public mainMenu()
     {   
     	Dimension d = new Dimension(Game.WIDTH,Game.HEIGHT);
@@ -90,7 +97,11 @@ public class mainMenu extends JFrame implements ActionListener
 
         setUpMenus();
     }
-    
+ 	/*****************************************************************
+    Creates a main menu 
+    @param args
+    @return none
+    *****************************************************************/   
     public static void main(String[] args) {
 		/*Main Menu Gui*/
 		mainMenu w = new mainMenu();
@@ -127,7 +138,10 @@ public class mainMenu extends JFrame implements ActionListener
 		 */
 
 	}
-
+	/*****************************************************************
+    Sets up an options menu 
+    @return none
+    *****************************************************************/
     private void setUpMenus(){
         options = new JMenu("Options");
         quit = new JMenuItem("Quit");
@@ -142,10 +156,13 @@ public class mainMenu extends JFrame implements ActionListener
         quit.addActionListener(this);
         help.addActionListener(this);
     }
-
+    /*****************************************************************
+    Reads in button presses on the main menu
+    @param e - Action event
+    @return none
+    *****************************************************************/
     public void actionPerformed(ActionEvent e)
     {
-        // put your code here
         JComponent buttonPressed = (JComponent) e.getSource();
         if (buttonPressed == startGame) {
 		if(easy.isSelected()||medium.isSelected()||hard.isSelected()){
