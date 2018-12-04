@@ -17,16 +17,16 @@ public enum Sound {
 		   INTRO("src/intro.wav"),
 		   MUNCH("src/munch.wav"),
 		   DEATH("src/death.wav");  
-	/**	clip object used to play our .wav files */
+	/** clip object used to play our .wav files */
 	private Clip clip;
 	/** File object to load the sound files into AudioSystem*/
 	File soundFile;
-	/** */
+	/** Audio Object*/
 	AudioInputStream audioIn;
-	/**
-	 * Constructor to load the sound file needed into the clip object for the first time
-	 * @param soundFileName - .wav file to open
-	 */
+	/*******************************************************************************
+	 Constructor to load the sound file needed into the clip object for the first time
+	 @param soundFileName - .wav file to open
+	 ******************************************************************************/
 	Sound(String soundFileName) {
 		soundFile = new File(soundFileName);
 		try {
@@ -42,9 +42,10 @@ public enum Sound {
 	         e.printStackTrace();
 	      }
 	}
-	/**
-	 * Plays the sound clip if another sound clip is not already playing
-	 */
+	/*******************************************************************
+	 Plays the sound clip if another sound clip is not already playing
+	 @return none
+	 *******************************************************************/
 	public void play() {
 		if(!clip.isActive()) {
 			try {
@@ -62,9 +63,10 @@ public enum Sound {
 			clip.start();
 		}
 	}
-	/**
-	 * Stops the current sound clip playing
-	 */
+	/*******************************************************************
+	 Stops the sound clip
+	 @return none
+	 *******************************************************************/
 	public void stop() {
 			clip.stop();
 	}
